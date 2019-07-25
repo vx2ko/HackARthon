@@ -1,0 +1,29 @@
+{
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  },
+  "resources" : [
+    {
+      "filename" : "hackathonlogo.arreferenceimage"
+    },
+    {
+      "filename" : "hackathonlogo2.arreferenceimage"
+    },
+    {
+      "filename" : "iheartlogo1.arreferenceimage"
+    },
+    {
+      "filename" : "iheartlogo2.arreferenceimage"
+    },
+    {
+      "filename" : "iheartlogo3.arreferenceimage"
+    },
+    {
+      "filename" : "iheartlogo4.arreferenceimage"
+    },
+    {
+      "filename" : "iheartlogo5.arreferenceimage"
+    }
+  ]
+}

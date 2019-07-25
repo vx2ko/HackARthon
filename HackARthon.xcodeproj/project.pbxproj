@@ -7,14 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		897B8C6A22E9F0DB003B6969 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897B8C6922E9F0DB003B6969 /* AppDelegate.swift */; };
-		897B8C6C22E9F0DB003B6969 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 897B8C6B22E9F0DB003B6969 /* art.scnassets */; };
-		897B8C6E22E9F0DB003B6969 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897B8C6D22E9F0DB003B6969 /* ViewController.swift */; };
-		897B8C7122E9F0DB003B6969 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 897B8C6F22E9F0DB003B6969 /* Main.storyboard */; };
-		897B8C7322E9F0DC003B6969 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 897B8C7222E9F0DC003B6969 /* Assets.xcassets */; };
-		897B8C7622E9F0DC003B6969 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 897B8C7422E9F0DC003B6969 /* LaunchScreen.storyboard */; };
+		895138C522EA0C130028BB9C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895138C422EA0C130028BB9C /* AppDelegate.swift */; };
+		895138C722EA10A20028BB9C /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895138C622EA10A20028BB9C /* HomeModel.swift */; };
 		897B8C8122E9F0DC003B6969 /* HackARthonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897B8C8022E9F0DC003B6969 /* HackARthonTests.swift */; };
 		897B8C8C22E9F0DC003B6969 /* HackARthonUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897B8C8B22E9F0DC003B6969 /* HackARthonUITests.swift */; };
+		897B8CA322E9F109003B6969 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897B8C9A22E9F108003B6969 /* MapViewController.swift */; };
+		897B8CA422E9F109003B6969 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 897B8C9B22E9F108003B6969 /* art.scnassets */; };
+		897B8CA522E9F109003B6969 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 897B8C9C22E9F108003B6969 /* Assets.xcassets */; };
+		897B8CA622E9F109003B6969 /* ARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897B8C9D22E9F108003B6969 /* ARViewController.swift */; };
+		897B8CA722E9F109003B6969 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 897B8C9E22E9F108003B6969 /* LaunchScreen.storyboard */; };
+		897B8CA822E9F109003B6969 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 897B8C9F22E9F108003B6969 /* Main.storyboard */; };
+		897B8CA922E9F109003B6969 /* WhataburgerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897B8CA022E9F108003B6969 /* WhataburgerModel.swift */; };
+		897B8CAB22E9F109003B6969 /* iHeartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897B8CA222E9F109003B6969 /* iHeartModel.swift */; };
+		897B8CAD22E9F214003B6969 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 897B8CAC22E9F214003B6969 /* Info.plist */; };
+		897B8CAF22E9F21F003B6969 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 897B8CAE22E9F21F003B6969 /* Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,20 +41,24 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		895138C422EA0C130028BB9C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		895138C622EA10A20028BB9C /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
 		897B8C6622E9F0DB003B6969 /* HackARthon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HackARthon.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		897B8C6922E9F0DB003B6969 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		897B8C6B22E9F0DB003B6969 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
-		897B8C6D22E9F0DB003B6969 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		897B8C7022E9F0DB003B6969 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		897B8C7222E9F0DC003B6969 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		897B8C7522E9F0DC003B6969 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		897B8C7722E9F0DC003B6969 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		897B8C7C22E9F0DC003B6969 /* HackARthonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HackARthonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		897B8C8022E9F0DC003B6969 /* HackARthonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HackARthonTests.swift; sourceTree = "<group>"; };
-		897B8C8222E9F0DC003B6969 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		897B8C8722E9F0DC003B6969 /* HackARthonUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HackARthonUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		897B8C8B22E9F0DC003B6969 /* HackARthonUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HackARthonUITests.swift; sourceTree = "<group>"; };
-		897B8C8D22E9F0DC003B6969 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		897B8C9A22E9F108003B6969 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		897B8C9B22E9F108003B6969 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
+		897B8C9C22E9F108003B6969 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		897B8C9D22E9F108003B6969 /* ARViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARViewController.swift; sourceTree = "<group>"; };
+		897B8C9E22E9F108003B6969 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		897B8C9F22E9F108003B6969 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		897B8CA022E9F108003B6969 /* WhataburgerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhataburgerModel.swift; sourceTree = "<group>"; };
+		897B8CA122E9F109003B6969 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		897B8CA222E9F109003B6969 /* iHeartModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iHeartModel.swift; sourceTree = "<group>"; };
+		897B8CAC22E9F214003B6969 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		897B8CAE22E9F21F003B6969 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,13 +109,17 @@
 		897B8C6822E9F0DB003B6969 /* HackARthon */ = {
 			isa = PBXGroup;
 			children = (
-				897B8C6922E9F0DB003B6969 /* AppDelegate.swift */,
-				897B8C6B22E9F0DB003B6969 /* art.scnassets */,
-				897B8C6D22E9F0DB003B6969 /* ViewController.swift */,
-				897B8C6F22E9F0DB003B6969 /* Main.storyboard */,
-				897B8C7222E9F0DC003B6969 /* Assets.xcassets */,
-				897B8C7422E9F0DC003B6969 /* LaunchScreen.storyboard */,
-				897B8C7722E9F0DC003B6969 /* Info.plist */,
+				897B8C9C22E9F108003B6969 /* Assets.xcassets */,
+				897B8C9B22E9F108003B6969 /* art.scnassets */,
+				895138C422EA0C130028BB9C /* AppDelegate.swift */,
+				897B8C9D22E9F108003B6969 /* ARViewController.swift */,
+				897B8C9A22E9F108003B6969 /* MapViewController.swift */,
+				897B8C9F22E9F108003B6969 /* Main.storyboard */,
+				897B8C9E22E9F108003B6969 /* LaunchScreen.storyboard */,
+				897B8CA222E9F109003B6969 /* iHeartModel.swift */,
+				897B8CA022E9F108003B6969 /* WhataburgerModel.swift */,
+				895138C622EA10A20028BB9C /* HomeModel.swift */,
+				897B8CA122E9F109003B6969 /* Info.plist */,
 			);
 			path = HackARthon;
 			sourceTree = "<group>";
@@ -113,8 +127,8 @@
 		897B8C7F22E9F0DC003B6969 /* HackARthonTests */ = {
 			isa = PBXGroup;
 			children = (
+				897B8CAC22E9F214003B6969 /* Info.plist */,
 				897B8C8022E9F0DC003B6969 /* HackARthonTests.swift */,
-				897B8C8222E9F0DC003B6969 /* Info.plist */,
 			);
 			path = HackARthonTests;
 			sourceTree = "<group>";
@@ -122,8 +136,8 @@
 		897B8C8A22E9F0DC003B6969 /* HackARthonUITests */ = {
 			isa = PBXGroup;
 			children = (
+				897B8CAE22E9F21F003B6969 /* Info.plist */,
 				897B8C8B22E9F0DC003B6969 /* HackARthonUITests.swift */,
-				897B8C8D22E9F0DC003B6969 /* Info.plist */,
 			);
 			path = HackARthonUITests;
 			sourceTree = "<group>";
@@ -196,6 +210,7 @@
 				TargetAttributes = {
 					897B8C6522E9F0DB003B6969 = {
 						CreatedOnToolsVersion = 10.2.1;
+						LastSwiftMigration = 1020;
 					};
 					897B8C7B22E9F0DC003B6969 = {
 						CreatedOnToolsVersion = 10.2.1;
@@ -232,10 +247,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				897B8C6C22E9F0DB003B6969 /* art.scnassets in Resources */,
-				897B8C7622E9F0DC003B6969 /* LaunchScreen.storyboard in Resources */,
-				897B8C7322E9F0DC003B6969 /* Assets.xcassets in Resources */,
-				897B8C7122E9F0DB003B6969 /* Main.storyboard in Resources */,
+				897B8CA722E9F109003B6969 /* LaunchScreen.storyboard in Resources */,
+				897B8CA522E9F109003B6969 /* Assets.xcassets in Resources */,
+				897B8CA422E9F109003B6969 /* art.scnassets in Resources */,
+				897B8CA822E9F109003B6969 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,6 +258,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				897B8CAD22E9F214003B6969 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -250,6 +266,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				897B8CAF22E9F21F003B6969 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,8 +277,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				897B8C6E22E9F0DB003B6969 /* ViewController.swift in Sources */,
-				897B8C6A22E9F0DB003B6969 /* AppDelegate.swift in Sources */,
+				897B8CA322E9F109003B6969 /* MapViewController.swift in Sources */,
+				895138C722EA10A20028BB9C /* HomeModel.swift in Sources */,
+				897B8CAB22E9F109003B6969 /* iHeartModel.swift in Sources */,
+				897B8CA622E9F109003B6969 /* ARViewController.swift in Sources */,
+				895138C522EA0C130028BB9C /* AppDelegate.swift in Sources */,
+				897B8CA922E9F109003B6969 /* WhataburgerModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,25 +316,6 @@
 			targetProxy = 897B8C8822E9F0DC003B6969 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		897B8C6F22E9F0DB003B6969 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				897B8C7022E9F0DB003B6969 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		897B8C7422E9F0DC003B6969 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				897B8C7522E9F0DC003B6969 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		897B8C8E22E9F0DC003B6969 /* Debug */ = {
@@ -436,7 +438,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = P9DNSFMYYZ;
 				INFOPLIST_FILE = HackARthon/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -444,6 +448,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = iHeartMedia.HackARthon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "HackARthon/HackARthon-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -453,7 +459,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = P9DNSFMYYZ;
 				INFOPLIST_FILE = HackARthon/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -461,6 +469,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = iHeartMedia.HackARthon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "HackARthon/HackARthon-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

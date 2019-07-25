@@ -1,12 +1,13 @@
 //
 //  AppDelegate.swift
-//  HackARthon
+//  ARTest
 //
-//  Created by Kiyano Oben on 7/25/19.
+//  Created by Kiyano Oben on 6/25/19.
 //  Copyright © 2019 Kiyano Oben. All rights reserved.
 //
 
 import UIKit
+import CoreLocation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -40,7 +41,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
 
 }
 
