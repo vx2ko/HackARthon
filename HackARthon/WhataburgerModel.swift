@@ -18,7 +18,7 @@ class WhataburgerModel: SCNNode {
         let logoNode = SCNNode()
         
         for logoChild in logoSceneObject.rootNode.childNodes {
-            logoNode.childNode(withName: "logo", recursively: true)
+            logoNode.childNode(withName: "whataburgerModel", recursively: true)
             logoNode.addChildNode(logoChild)
         }
         
@@ -29,6 +29,8 @@ class WhataburgerModel: SCNNode {
         let position = SCNVector3Make(xPos, -0.75, zPos)
         
         self.position = position
+        logoNode.name = "Whataburger Logo"
+
         self.addChildNode(logoNode)
     }
     

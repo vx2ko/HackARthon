@@ -16,7 +16,10 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
     @IBOutlet var sceneView: ARSCNView!
     @IBOutlet weak var infoLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
+    @IBOutlet weak var itemLabel: UILabel!
     
+    var arVCItemArray = [String]()
+//    let itemTableVC = ItemTableViewController()
     var locationManager: CLLocationManager = CLLocationManager()
     let iHeartGeoFenceCenter = CLLocationCoordinate2DMake(29.647751, -98.453967)
     let homeGeoFenceCenter = CLLocationCoordinate2DMake(29.529139, -98.404270)
@@ -34,22 +37,20 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
         sceneView.showsStatistics = false
         
         //Enable feature points
-        //sceneView.debugOptions = ARSCNDebugOptions.showFeaturePoints
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.activityType = CLActivityType.fitness
-//        locationManager.startUpdatingLocation()
+        
+        UIApplication.shared.isIdleTimerDisabled = true
+        
+        itemLabel.isHidden = true
         
         //Add gesture recognizer
         self.sceneView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap(_:))))
-
+        
         //Set lighting
         configureLighting()
-        
-        //Load model
-//        logoModel.loadLogo()
-//        sceneView.scene.rootNode.addChildNode(logoModel)
 
     }
     
@@ -67,16 +68,6 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
         sceneView.autoenablesDefaultLighting = true
         sceneView.automaticallyUpdatesLighting = true
     }
-    
-//    func addMcjag() {
-//
-//        let mcjagModel = Mcjag()
-//
-//        mcjagModel.loadMcjag()
-//
-//        sceneView.scene.rootNode.addChildNode(mcjagModel)
-//
-//    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -197,8 +188,21 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
         }
     }
     
-    func removeModels(node: SCNNode){
-        node.removeFromParentNode()
+    func removeiHeartModel(){
+        
+        let model = IHeartModel()
+        model.removeFromParentNode()
+        
+    }
+    
+    func removeHomeModel(){
+        let model = HomeModel()
+        model.removeFromParentNode()
+    }
+    
+    func removeWhataburgerModel(){
+        let model = WhataburgerModel()
+        model.removeFromParentNode()
     }
     
     func addiHeartModel(){
@@ -231,53 +235,86 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
 
         if !tappedNode.isEmpty {
             let node = tappedNode[0].node
-            let name = node.name
+            let nodeParent = node.parent
+            let parentName = nodeParent?.name
+            
             //print("\(name)")
             
-            if (name != nil) {
-
-                addAnimation(node: tappedNode[0].node)
-
+            if let node = tappedNode.first?.node as SCNNode? {
+                addAnimation(node: node)
+                itemLabel.isHidden = false
+                itemLabel.text = ("You got \(parentName!)")
+                //itemTableViewController.itemArray.append(parentName!)
+                arVCItemArray.append(parentName!)
+                //print(arVCItemArray)
+                
             }
+
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "segueToItems" {
+            //Replace "SegueToProfileView" with your segue identifier
+            let destinationNavController = segue.destination as! UINavigationController
+            let itemTableVC = destinationNavController.topViewController as! ItemTableViewController
+            
+            itemTableVC.itemVCArray = arVCItemArray
+            print(arVCItemArray)
+            print(itemTableVC.itemVCArray)
+            
         }
     }
     
     func setUpGeofence() {
         let homeGeoFenceCenter = CLLocationCoordinate2DMake(29.529139, -98.404270)
-        let homeGeofenceRegion = CLCircularRegion(center: homeGeoFenceCenter, radius: 100, identifier: "Home")
+        let homeGeofenceRegion = CLCircularRegion(center: homeGeoFenceCenter, radius: 30, identifier: "Home")
         let workGeoFenceCenter = CLLocationCoordinate2DMake(29.647667, -98.453903)
-        let workGeofenceRegion = CLCircularRegion(center: workGeoFenceCenter, radius: 100, identifier: "Work")
-        locationManager.requestState(for: homeGeofenceRegion)
-        locationManager.requestState(for: workGeofenceRegion)
+        let workGeofenceRegion = CLCircularRegion(center: workGeoFenceCenter, radius: 30, identifier: "Work")
+        let whataburgerGeoFenceCenter = CLLocationCoordinate2DMake(29.636807, -98.454548)
+        let whataburgerGeofenceRegion = CLCircularRegion(center: whataburgerGeoFenceCenter, radius: 30, identifier: "Whataburger")
+        let newGeoFenceCenter = CLLocationCoordinate2DMake(29.615043, -98.546712)
+        let newGeofenceRegion = CLCircularRegion(center: newGeoFenceCenter, radius: 30, identifier: "Random Location")
+
         locationManager.startMonitoring(for: homeGeofenceRegion)
         locationManager.startMonitoring(for: workGeofenceRegion)
+        locationManager.startMonitoring(for: whataburgerGeofenceRegion)
+        locationManager.startMonitoring(for: newGeofenceRegion)
         locationManager.startUpdatingLocation()
+        locationManager.requestState(for: homeGeofenceRegion)
+        locationManager.requestState(for: workGeofenceRegion)
+        locationManager.requestState(for: whataburgerGeofenceRegion)
+        locationManager.requestState(for: newGeofenceRegion)
+
         print("Geofence Setup")
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if (status == CLAuthorizationStatus.authorizedAlways) {
             setUpGeofence()
+        
         }
     }
     
     func locationManager(_ manager: CLLocationManager, didStartMonitoringFor region: CLRegion) {
-        print("Monitoring")
+        print("Monitoring \(region.identifier)")
     }
     
     func locationManager(_ manager: CLLocationManager, didDetermineState state: CLRegionState, for region: CLRegion) {
         
         if state == CLRegionState.inside{
-            print("You are in")
             switch region.identifier {
             case "Work":
                 infoLabel.text = "You are at work"
+                print("regionState is Work")
                 addiHeartModel()
             case "Home":
                 infoLabel.text = "You are home"
+                print("regionState is home")
                 addHomeModel()
             case "Whataburger":
                 infoLabel.text = "You are at Whataburger"
+                print("regionState is Whataburger")
                 addWhataburgerModel()
             default:
                 return
@@ -291,12 +328,18 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
         switch region.identifier {
         case "Work":
             infoLabel.text = "You are at work"
+            print("regionState is Work")
             addiHeartModel()
         case "Home":
             infoLabel.text = "You are home"
+            print("regionState is home")
             addHomeModel()
         case "Whataburger":
             infoLabel.text = "You are at Whataburger"
+            print("regionState is Whataburger")
+            addWhataburgerModel()
+        case "Random Location":
+            infoLabel.text = "You are somewhere mysterious"
             addWhataburgerModel()
         default:
             return
@@ -305,14 +348,19 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
     
     //Called if device leaves geofence
     func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
-        infoLabel.text = "Bye"
-        print("Bye!")
-        removeModels(node: sceneView.scene.rootNode)
         switch region.identifier {
         case "Work":
             infoLabel.text = "You are leaving work"
+            removeiHeartModel()
         case "Home":
             infoLabel.text = "You are leaving home"
+            removeHomeModel()
+        case "Whataburger":
+            infoLabel.text = "You are leaving Whataburger"
+            removeWhataburgerModel()
+        case "Random Location":
+            infoLabel.text = "You are leaving the mysterious place"
+            removeWhataburgerModel()
         default:
             return
         }
@@ -325,12 +373,12 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
 
         //infoLabel.text = "locations = \(locValue.latitude) \(locValue.longitude)"
         print("locations = \(locValue.latitude) \(locValue.longitude)")
-       
-        let home = CLLocation(latitude: 29.529139, longitude: -98.404270)
+
+        let home = CLLocation(latitude: 29.647667, longitude: -98.453903)
         let location = manager.location
         let distance = location?.distance(from: home)
-        distanceLabel.text = "\(distance)"
-        print("\(distance)")
+        distanceLabel.text = "\(distance!)"
+        print("\(distance!)")
         
     }
     

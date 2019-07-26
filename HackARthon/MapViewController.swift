@@ -26,20 +26,50 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         locationManager.startUpdatingLocation()
         
         mapView.showsUserLocation = true
-        
-        let iHeartAnnotation = MKPointAnnotation()
-        iHeartAnnotation.coordinate = CLLocationCoordinate2DMake(29.647667, -98.453903)
-        iHeartAnnotation.title = "iHeartMedia"
-        mapView.addAnnotation(iHeartAnnotation)
+        setupAnnotations()  
 
-        // Do any additional setup after loading the view.
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let userLocation = locationManager.location?.coordinate {
             let viewRegion = MKCoordinateRegion.init(center: userLocation, latitudinalMeters: 500, longitudinalMeters: 500)
             mapView.setRegion(viewRegion, animated: false)
         }
+        // Do any additional setup after loading the view.
     }
+    
+    //Hide status bar
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
+    //Hide home bar
+    override var prefersHomeIndicatorAutoHidden: Bool {
+        return true
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 
+    }
+    
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        
+    }
+    
+    func setupAnnotations(){
+        let iHeartAnnotation = MKPointAnnotation()
+        let homeAnnotation = MKPointAnnotation()
+        let whataburgerAnnotation = MKPointAnnotation()
+        
+        iHeartAnnotation.coordinate = CLLocationCoordinate2DMake(29.647667, -98.453903)
+        homeAnnotation.coordinate = CLLocationCoordinate2DMake(29.529139, -98.404270)
+        whataburgerAnnotation.coordinate = CLLocationCoordinate2DMake(29.636807, -98.454548)
+
+        iHeartAnnotation.title = "iHeartMedia"
+        homeAnnotation.title = "Home"
+        whataburgerAnnotation.title = "Whataburger"
+        
+        mapView.addAnnotation(iHeartAnnotation)
+        mapView.addAnnotation(homeAnnotation)
+        mapView.addAnnotation(whataburgerAnnotation)
+
+    }
+    
 }

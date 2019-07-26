@@ -21,6 +21,7 @@
 		897B8CAB22E9F109003B6969 /* iHeartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897B8CA222E9F109003B6969 /* iHeartModel.swift */; };
 		897B8CAD22E9F214003B6969 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 897B8CAC22E9F214003B6969 /* Info.plist */; };
 		897B8CAF22E9F21F003B6969 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 897B8CAE22E9F21F003B6969 /* Info.plist */; };
+		89AFBACA22EA959500772B1D /* ItemTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89AFBAC922EA959500772B1D /* ItemTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		897B8CA222E9F109003B6969 /* iHeartModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iHeartModel.swift; sourceTree = "<group>"; };
 		897B8CAC22E9F214003B6969 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		897B8CAE22E9F21F003B6969 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		89AFBAC922EA959500772B1D /* ItemTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,7 @@
 				895138C422EA0C130028BB9C /* AppDelegate.swift */,
 				897B8C9D22E9F108003B6969 /* ARViewController.swift */,
 				897B8C9A22E9F108003B6969 /* MapViewController.swift */,
+				89AFBAC922EA959500772B1D /* ItemTableViewController.swift */,
 				897B8C9F22E9F108003B6969 /* Main.storyboard */,
 				897B8C9E22E9F108003B6969 /* LaunchScreen.storyboard */,
 				897B8CA222E9F109003B6969 /* iHeartModel.swift */,
@@ -283,6 +286,7 @@
 				897B8CA622E9F109003B6969 /* ARViewController.swift in Sources */,
 				895138C522EA0C130028BB9C /* AppDelegate.swift in Sources */,
 				897B8CA922E9F109003B6969 /* WhataburgerModel.swift in Sources */,
+				89AFBACA22EA959500772B1D /* ItemTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

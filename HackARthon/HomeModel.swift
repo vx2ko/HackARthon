@@ -13,12 +13,12 @@ class HomeModel: SCNNode {
     
     
     func loadLogo() {
-        guard let logoSceneObject = SCNScene(named: "art.scnassets/iheart3dV2.scn") else {return}
+        guard let logoSceneObject = SCNScene(named: "art.scnassets/bomberman.dae") else {return}
         
         let logoNode = SCNNode()
         
         for logoChild in logoSceneObject.rootNode.childNodes {
-            logoNode.childNode(withName: "logo", recursively: true)
+            logoNode.childNode(withName: "homeModel", recursively: true)
             logoNode.addChildNode(logoChild)
         }
         
@@ -29,10 +29,17 @@ class HomeModel: SCNNode {
         let position = SCNVector3Make(xPos, -0.75, zPos)
         
         self.position = position
+        logoNode.name = "Bomberman"
         self.addChildNode(logoNode)
     }
     
+    func addItem(){
+        
+    }
+    
 }
+
+
 
 //Create random position in ARSCNView
 func randomPositionHomeModel(lowerBound lower:Float, upperBound upper:Float) -> Float {

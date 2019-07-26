@@ -18,7 +18,7 @@ class IHeartModel: SCNNode {
         let logoNode = SCNNode()
         
         for logoChild in logoSceneObject.rootNode.childNodes {
-            logoNode.childNode(withName: "logo", recursively: true)
+            logoNode.childNode(withName: "iHeartModel", recursively: true)
             logoNode.addChildNode(logoChild)
         }
         
@@ -29,8 +29,13 @@ class IHeartModel: SCNNode {
         let position = SCNVector3Make(xPos, -0.75, zPos)
         
         self.position = position
+        logoNode.name = "iHeartLogo"
         self.addChildNode(logoNode)
     }
+    
+//    func removeLogo(){
+//        logoNode.removeFromParentNode()
+//    }
     
 }
 
