@@ -15,9 +15,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
+    var items = [NSManagedObject]()
+    
     lazy var persistentContainer: NSPersistentContainer = {
         
-        let container = NSPersistentContainer(name: "Item")
+        let container = NSPersistentContainer(name: "HackARthon")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error {
                 
@@ -26,6 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         })
         return container
     }()
+
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {

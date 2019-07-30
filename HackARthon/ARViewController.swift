@@ -21,6 +21,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
     
     var arVCItemArray = [String]()
     var arCellImageArray = [UIImage]()
+    var itemsCDArray = [NSManagedObject]()
 //    let itemTableVC = ItemTableViewController()
     var locationManager: CLLocationManager = CLLocationManager()
     let iHeartGeoFenceCenter = CLLocationCoordinate2DMake(29.647751, -98.453967)
@@ -244,15 +245,16 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
             let nodeParent = node.parent
             let parentName = nodeParent?.name
             
-            //print("\(name)")
-            
             if let node = tappedNode.first?.node as SCNNode? {
                 addAnimation(node: nodeParent!)
                 itemLabel.isHidden = false
                 itemLabel.text = ("You got \(parentName!)")
                 //itemTableViewController.itemArray.append(parentName!)
-                arVCItemArray.append(parentName!)
-                arCellImageArray.append(UIImage(named: "art.scnassets/emoji.png")!)
+                //arVCItemArray.append(parentName!)
+                let imageName = "art.scnassets/emoji.png"
+                save(name: parentName!, imageName: imageName)
+                //arCellImageArray.append(UIImage(named: "art.scnassets/emoji.png")!)
+                
 //                switch (parentName!) {
 //                case "iHeartModel":
 //                    arCellImageArray.append(UIImage(named: "art.scnassets/emoji.png")!)
@@ -269,21 +271,16 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "segueToItems" {
-            let destinationNavController = segue.destination as! UINavigationController
-            let itemTableVC = destinationNavController.topViewController as! ItemTableViewController
-            
-            itemTableVC.itemVCArray = arVCItemArray
-            itemTableVC.itemImageArray = arCellImageArray
-            
-//            print(arVCItemArray)
-//            print(arCellImageArray)
-//            print(itemTableVC.itemVCArray)
-//            print(itemTableVC.itemImageArray)
-            
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "segueToItems" {
+//            let destinationNavController = segue.destination as! UINavigationController
+//            let itemTableVC = destinationNavController.topViewController as! ItemTableViewController
+//            
+//            itemTableVC.itemVCArray = arVCItemArray
+//            itemTableVC.itemImageArray = arCellImageArray
+//            
+//        }
+//    }
     
     func setUpGeofence() {
         let homeGeoFenceCenter = CLLocationCoordinate2DMake(29.529139, -98.404270)
@@ -399,6 +396,38 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
         distanceLabel.text = "\(distance!)"
         print("\(distance!)")
         
+    }
+    
+    func save(name: String, imageName: String) {
+        
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+        
+        // 1
+        let managedContext =
+            appDelegate.persistentContainer.viewContext
+        
+        // 2
+        let entity =
+            NSEntityDescription.entity(forEntityName: "Item",
+                                       in: managedContext)!
+        
+        let item = NSManagedObject(entity: entity,
+                                   insertInto: managedContext)
+        
+        // 3
+        item.setValue(name, forKeyPath: "name")
+        item.setValue(imageName, forKeyPath: "imageName")
+        
+        // 4
+        do {
+            try managedContext.save()
+            itemsCDArray.append(item)
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
     }
     
 }

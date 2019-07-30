@@ -13,27 +13,39 @@ class ItemTableViewController: UITableViewController {
     
     
     let arViewVC = ARViewController()
-    var itemVCArray = [String]()
-    var itemImageArray = [UIImage]()
-    var itemEntityArray = [Item]()
+    //var itemVCArray = [String]()
+    //var itemImageArray = [UIImage]()
+    //var itemEntityArray = [NSManagedObject]()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     @IBOutlet var itemTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         
         //itemTableView.reloadData()
         itemTableView.dataSource = self
         itemTableView.delegate = self
         itemTableView.register(UITableViewCell.self, forCellReuseIdentifier: "itemCell")
-        //print(itemVCArray)
 
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+        
+        let managedContext =
+            appDelegate.persistentContainer.viewContext
+        
+        let fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: "Item")
+        
+        do {
+            arViewVC.itemsCDArray = try managedContext.fetch(fetchRequest)
+            print(arViewVC.itemsCDArray)
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     // MARK: - Table view data source
@@ -45,14 +57,17 @@ class ItemTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return itemVCArray.count
+        return arViewVC.itemsCDArray.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let item = arViewVC.itemsCDArray[indexPath.row]
+        let imageName = item.value(forKeyPath: "imageName") as? String
+        print(imageName)
         let itemCell = tableView.dequeueReusableCell(withIdentifier: "itemCell", for: indexPath)
-        itemCell.imageView?.image = itemImageArray[indexPath.item]
-        itemCell.textLabel?.text = itemVCArray[indexPath.item]
-        print(itemVCArray)
+        //itemCell.imageView?.image = itemImageArray[indexPath.item]
+        itemCell.textLabel?.text = item.value(forKeyPath: "name") as? String
+        //itemCell.textLabel?.text = itemVCArray[indexPath.item]
         return itemCell
     }
     
