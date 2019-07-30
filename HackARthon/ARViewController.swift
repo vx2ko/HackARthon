@@ -10,6 +10,7 @@ import UIKit
 import SceneKit
 import ARKit
 import CoreLocation
+import CoreData
 
 class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, CLLocationManagerDelegate {
     
@@ -19,6 +20,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
     @IBOutlet weak var itemLabel: UILabel!
     
     var arVCItemArray = [String]()
+    var arCellImageArray = [UIImage]()
 //    let itemTableVC = ItemTableViewController()
     var locationManager: CLLocationManager = CLLocationManager()
     let iHeartGeoFenceCenter = CLLocationCoordinate2DMake(29.647751, -98.453967)
@@ -26,6 +28,10 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
     
     let logoRefImageName = ["iheartlogo1","iheartlogo2","iheartlogo3","iheartlogo4","iheartlogo5"]
     let hackathonRefImageName = ["hackathonlogo2", "hackathonlogo"]
+    
+    var iHeartLogo = IHeartModel()
+    var whataburgerModel = WhataburgerModel()
+    var homeModel = HomeModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -241,12 +247,22 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
             //print("\(name)")
             
             if let node = tappedNode.first?.node as SCNNode? {
-                addAnimation(node: node)
+                addAnimation(node: nodeParent!)
                 itemLabel.isHidden = false
                 itemLabel.text = ("You got \(parentName!)")
                 //itemTableViewController.itemArray.append(parentName!)
                 arVCItemArray.append(parentName!)
-                //print(arVCItemArray)
+                arCellImageArray.append(UIImage(named: "art.scnassets/emoji.png")!)
+//                switch (parentName!) {
+//                case "iHeartModel":
+//                    arCellImageArray.append(UIImage(named: "art.scnassets/emoji.png")!)
+//                case "whataburgerModel":
+//                    arCellImageArray.append(UIImage(named: "art.scnassets/emoji.png")!)
+//                case "homeModel":
+//                    arCellImageArray.append(UIImage(named: "art.scnassets/emoji.png")!)
+//                default:
+//                    return
+//                }
                 
             }
 
@@ -255,13 +271,16 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueToItems" {
-            //Replace "SegueToProfileView" with your segue identifier
             let destinationNavController = segue.destination as! UINavigationController
             let itemTableVC = destinationNavController.topViewController as! ItemTableViewController
             
             itemTableVC.itemVCArray = arVCItemArray
-            print(arVCItemArray)
-            print(itemTableVC.itemVCArray)
+            itemTableVC.itemImageArray = arCellImageArray
+            
+//            print(arVCItemArray)
+//            print(arCellImageArray)
+//            print(itemTableVC.itemVCArray)
+//            print(itemTableVC.itemImageArray)
             
         }
     }

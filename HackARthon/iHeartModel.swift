@@ -11,6 +11,7 @@ import ARKit
 
 class IHeartModel: SCNNode {
     
+    var itemImage = UIImage(named: "art.scnassets/iheartconcert.jpg")
     
     func loadLogo() {
         guard let logoSceneObject = SCNScene(named: "art.scnassets/iheart3dV2.scn") else {return}
@@ -36,6 +37,10 @@ class IHeartModel: SCNNode {
 //    func removeLogo(){
 //        logoNode.removeFromParentNode()
 //    }
+    
+    func setItemInfo(){
+        
+    }
     
 }
 

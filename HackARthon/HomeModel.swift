@@ -11,6 +11,7 @@ import ARKit
 
 class HomeModel: SCNNode {
     
+    var itemImage = UIImage(named: "art.scnassets/iheartconcert.jpg")
     
     func loadLogo() {
         guard let logoSceneObject = SCNScene(named: "art.scnassets/bomberman.dae") else {return}

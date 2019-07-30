@@ -7,12 +7,16 @@
 //
 
 import UIKit
+import CoreData
 
 class ItemTableViewController: UITableViewController {
     
     
     let arViewVC = ARViewController()
     var itemVCArray = [String]()
+    var itemImageArray = [UIImage]()
+    var itemEntityArray = [Item]()
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     @IBOutlet var itemTableView: UITableView!
     
     override func viewDidLoad() {
@@ -46,6 +50,7 @@ class ItemTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let itemCell = tableView.dequeueReusableCell(withIdentifier: "itemCell", for: indexPath)
+        itemCell.imageView?.image = itemImageArray[indexPath.item]
         itemCell.textLabel?.text = itemVCArray[indexPath.item]
         print(itemVCArray)
         return itemCell

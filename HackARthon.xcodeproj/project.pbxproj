@@ -22,6 +22,7 @@
 		897B8CAD22E9F214003B6969 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 897B8CAC22E9F214003B6969 /* Info.plist */; };
 		897B8CAF22E9F21F003B6969 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 897B8CAE22E9F21F003B6969 /* Info.plist */; };
 		89AFBACA22EA959500772B1D /* ItemTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89AFBAC922EA959500772B1D /* ItemTableViewController.swift */; };
+		89AFBACD22EF589E00772B1D /* HackARthon.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 89AFBACB22EF589E00772B1D /* HackARthon.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		897B8CAC22E9F214003B6969 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		897B8CAE22E9F21F003B6969 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		89AFBAC922EA959500772B1D /* ItemTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTableViewController.swift; sourceTree = "<group>"; };
+		89AFBACC22EF589E00772B1D /* HackARthon.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HackARthon.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,7 @@
 				897B8CA022E9F108003B6969 /* WhataburgerModel.swift */,
 				895138C622EA10A20028BB9C /* HomeModel.swift */,
 				897B8CA122E9F109003B6969 /* Info.plist */,
+				89AFBACB22EF589E00772B1D /* HackARthon.xcdatamodeld */,
 			);
 			path = HackARthon;
 			sourceTree = "<group>";
@@ -282,6 +285,7 @@
 			files = (
 				897B8CA322E9F109003B6969 /* MapViewController.swift in Sources */,
 				895138C722EA10A20028BB9C /* HomeModel.swift in Sources */,
+				89AFBACD22EF589E00772B1D /* HackARthon.xcdatamodeld in Sources */,
 				897B8CAB22E9F109003B6969 /* iHeartModel.swift in Sources */,
 				897B8CA622E9F109003B6969 /* ARViewController.swift in Sources */,
 				895138C522EA0C130028BB9C /* AppDelegate.swift in Sources */,
@@ -373,7 +377,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -428,7 +432,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -455,7 +459,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "HackARthon/HackARthon-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -475,7 +479,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "HackARthon/HackARthon-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -597,6 +601,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		89AFBACB22EF589E00772B1D /* HackARthon.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				89AFBACC22EF589E00772B1D /* HackARthon.xcdatamodel */,
+			);
+			currentVersion = 89AFBACC22EF589E00772B1D /* HackARthon.xcdatamodel */;
+			path = HackARthon.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 897B8C5E22E9F0DB003B6969 /* Project object */;
 }
