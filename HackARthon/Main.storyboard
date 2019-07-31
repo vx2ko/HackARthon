@@ -217,7 +217,7 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.64629155400000005" green="0.1885296702" blue="0.20781192179999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <connections>
-                                    <segue destination="amS-sB-89L" kind="presentation" modalTransitionStyle="flipHorizontal" id="b6m-qr-6Lr"/>
+                                    <segue destination="amS-sB-89L" kind="presentation" identifier="itemDetailSegue" modalTransitionStyle="flipHorizontal" id="b6m-qr-6Lr"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -263,16 +263,24 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WUl-4S-IQu">
+                            <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FEC-tH-a83">
                                 <rect key="frame" x="0.0" y="88" width="414" height="808"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </arscnView>
+                            </sceneKitView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Kf-AL-RGz">
+                                <rect key="frame" x="20" y="104" width="137" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="qRi-Bm-8Sm"/>
                     </view>
                     <connections>
-                        <outlet property="itemSceneView" destination="WUl-4S-IQu" id="Xs2-Bq-sLL"/>
+                        <outlet property="itemSceneView" destination="FEC-tH-a83" id="EWY-cR-qx3"/>
+                        <outlet property="testLabel" destination="8Kf-AL-RGz" id="ZUw-Gf-Fe1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NG5-4a-9JA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -304,6 +312,7 @@
         <image name="RadioImage.png" width="1242" height="2688"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="b6m-qr-6Lr"/>
         <segue reference="H2f-3E-1nI"/>
         <segue reference="7TM-0h-cIq"/>
         <segue reference="XyJ-97-2oc"/>

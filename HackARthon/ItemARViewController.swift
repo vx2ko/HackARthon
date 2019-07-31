@@ -13,7 +13,8 @@ import SceneKit
 class ItemARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SKSceneDelegate {
 
     
-    @IBOutlet var itemSceneView: ARSCNView!
+    @IBOutlet weak var testLabel: UILabel!
+    @IBOutlet var itemSceneView: SCNView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,8 +22,9 @@ class ItemARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelega
         itemSceneView.delegate = self
         
         itemSceneView.autoenablesDefaultLighting = true
-        
-        let itemTableVC = ItemTableViewController()
+        itemSceneView.allowsCameraControl = true
+
+        setScene()
         
         // Do any additional setup after loading the view.
     }
@@ -38,27 +40,6 @@ class ItemARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelega
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        
-        guard let logoSceneObject = SCNScene(named: "art.scnassets/iheart3dV2.scn") else {return}
-        
-        let logoNode = SCNNode()
-        
-        for logoChild in logoSceneObject.rootNode.childNodes {
-            logoNode.childNode(withName: "iHeartModel", recursively: true)
-            logoNode.addChildNode(logoChild)
-        }
-        
-        let position = SCNVector3Make(0, -0.85, -0.75)
-        logoNode.name = "iHeartLogo"
-        logoNode.position = position
-        itemSceneView.scene.rootNode.addChildNode(logoNode)
-        
-        let configuration = ARWorldTrackingConfiguration()
-        configuration.planeDetection = .horizontal
-        
-        // Run the view's session
-        itemSceneView.session.run(configuration)
-                
 
     }
     
@@ -68,6 +49,20 @@ class ItemARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelega
         // Pause the view's session
     }
 
+    func setScene(){
+        guard let logoSceneObject = SCNScene(named: "art.scnassets/iheart3dV2.scn") else {return}
+        let logoNode = SCNNode()
+        
+        for logoChild in logoSceneObject.rootNode.childNodes {
+            logoNode.childNode(withName: "itemModel", recursively: true)
+            logoNode.addChildNode(logoChild)
+        }
+        
+        logoSceneObject.rootNode.addChildNode(logoNode)
+        itemSceneView.scene = logoSceneObject
+
+    }
+    
     /*
     // MARK: - Navigation
 

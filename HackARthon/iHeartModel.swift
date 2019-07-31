@@ -15,7 +15,6 @@ class IHeartModel: SCNNode {
 
     func loadLogo() {
         guard let logoSceneObject = SCNScene(named: "art.scnassets/iheart3dV2.scn") else {return}
-        
         let logoNode = SCNNode()
         
         for logoChild in logoSceneObject.rootNode.childNodes {
