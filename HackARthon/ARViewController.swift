@@ -29,6 +29,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
     
     let logoRefImageName = ["iheartlogo1","iheartlogo2","iheartlogo3","iheartlogo4","iheartlogo5"]
     let hackathonRefImageName = ["hackathonlogo2", "hackathonlogo"]
+    let whataburgerRefImageName = ["whataburgerLogo1","whataburgerLogo2"]
     
     var iHeartLogo = IHeartModel()
     var whataburgerModel = WhataburgerModel()
@@ -171,6 +172,26 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
             }
         }
         
+        for whatLogoName in whataburgerRefImageName {
+            if trackedImageName == whatLogoName {
+                let plane = SCNPlane(width: 10, height: 6)
+                plane.cornerRadius = 0.5
+                let material = SCNMaterial()
+                
+                material.diffuse.contents = UIImage(named: "art.scnassets/whataburgerAd.jpg")
+                plane.materials = [material]
+                
+                let planeNode = SCNNode(geometry: plane)
+                planeNode.eulerAngles.x = -.pi / 2
+                planeNode.position.y = -2
+                planeNode.name = "whataburgerImage"
+                
+                node.addChildNode(planeNode)
+                node.removeFromParentNode()
+                
+            }
+        }
+        
         return node
 
     }
@@ -249,9 +270,10 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
                 addAnimation(node: nodeParent!)
                 itemLabel.isHidden = false
                 itemLabel.text = ("You got \(parentName!)")
+
                 //itemTableViewController.itemArray.append(parentName!)
                 //arVCItemArray.append(parentName!)
-                let imageName = "art.scnassets/emoji.png"
+                let imageName: String! = "art.scnassets/itemImage.png"
                 save(name: parentName!, imageName: imageName)
                 //arCellImageArray.append(UIImage(named: "art.scnassets/emoji.png")!)
                 
@@ -270,17 +292,6 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
 
         }
     }
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "segueToItems" {
-//            let destinationNavController = segue.destination as! UINavigationController
-//            let itemTableVC = destinationNavController.topViewController as! ItemTableViewController
-//            
-//            itemTableVC.itemVCArray = arVCItemArray
-//            itemTableVC.itemImageArray = arCellImageArray
-//            
-//        }
-//    }
     
     func setUpGeofence() {
         let homeGeoFenceCenter = CLLocationCoordinate2DMake(29.529139, -98.404270)

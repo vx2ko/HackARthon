@@ -11,8 +11,8 @@ import ARKit
 
 class IHeartModel: SCNNode {
     
-    var itemImage = UIImage(named: "art.scnassets/iheartconcert.jpg")
-    
+    let imageName: String! = "art.scnassets/emoji.png"
+
     func loadLogo() {
         guard let logoSceneObject = SCNScene(named: "art.scnassets/iheart3dV2.scn") else {return}
         

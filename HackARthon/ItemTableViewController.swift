@@ -63,12 +63,22 @@ class ItemTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let item = arViewVC.itemsCDArray[indexPath.row]
         let imageName = item.value(forKeyPath: "imageName") as? String
-        print(imageName)
+        let imageNameString: String! = imageName
+        print(imageNameString)
         let itemCell = tableView.dequeueReusableCell(withIdentifier: "itemCell", for: indexPath)
+        itemCell.imageView?.image = UIImage(named: imageNameString)
         //itemCell.imageView?.image = itemImageArray[indexPath.item]
         itemCell.textLabel?.text = item.value(forKeyPath: "name") as? String
         //itemCell.textLabel?.text = itemVCArray[indexPath.item]
         return itemCell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("you tapped row \(indexPath.row)")
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let destination = storyboard.instantiateViewController(withIdentifier: "ItemARViewController") as! ItemARViewController
+        navigationController?.pushViewController(destination, animated: true)
     }
     
     /*

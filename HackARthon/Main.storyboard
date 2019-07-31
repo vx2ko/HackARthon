@@ -122,7 +122,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="Wob-HQ-mri" kind="presentation" identifier="segueToItems" id="Mz8-5R-zo0"/>
+                                    <segue destination="Wob-HQ-mri" kind="presentation" identifier="segueToItems" modalTransitionStyle="flipHorizontal" id="Mz8-5R-zo0"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mYE-BR-KlP">
@@ -202,7 +202,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="sectionIndexBackgroundColor" red="0.64629155400000005" green="0.1885296702" blue="0.20781192179999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="itemCell" rowHeight="70" id="feZ-sd-2Oi">
+                            <tableViewCell clipsSubviews="YES" tag="1" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="itemCell" rowHeight="70" id="feZ-sd-2Oi">
                                 <rect key="frame" x="0.0" y="28" width="414" height="70"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="feZ-sd-2Oi" id="fR9-3z-OWE">
@@ -216,6 +216,9 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.64629155400000005" green="0.1885296702" blue="0.20781192179999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <connections>
+                                    <segue destination="amS-sB-89L" kind="presentation" modalTransitionStyle="flipHorizontal" id="b6m-qr-6Lr"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -227,7 +230,7 @@
                         <barButtonItem key="leftBarButtonItem" title="Back" id="r30-zE-SSM">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <segue destination="BV1-FR-VrT" kind="presentation" id="Ahv-aj-AAn"/>
+                                <segue destination="BV1-FR-VrT" kind="presentation" modalTransitionStyle="flipHorizontal" id="Ahv-aj-AAn"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -238,6 +241,43 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a4o-6y-62R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1086.9565217391305" y="306.69642857142856"/>
+        </scene>
+        <!--ItemAR View Controller-->
+        <scene sceneID="E3l-Ii-tOM">
+            <objects>
+                <viewController storyboardIdentifier="ItemARViewController" id="amS-sB-89L" customClass="ItemARViewController" customModule="HackARthon" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="84T-jc-wkn">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xEX-lo-4lt">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Title" id="2H0-w5-vUc">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="53I-og-Y79">
+                                            <connections>
+                                                <segue destination="whM-ML-izx" kind="presentation" id="7TM-0h-cIq"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WUl-4S-IQu">
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </arscnView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="qRi-Bm-8Sm"/>
+                    </view>
+                    <connections>
+                        <outlet property="itemSceneView" destination="WUl-4S-IQu" id="Xs2-Bq-sLL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NG5-4a-9JA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1944.9275362318842" y="306.69642857142856"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="xDI-Yk-WXu">
@@ -264,6 +304,8 @@
         <image name="RadioImage.png" width="1242" height="2688"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="bsa-l9-xkG"/>
+        <segue reference="H2f-3E-1nI"/>
+        <segue reference="7TM-0h-cIq"/>
+        <segue reference="XyJ-97-2oc"/>
     </inferredMetricsTieBreakers>
 </document>

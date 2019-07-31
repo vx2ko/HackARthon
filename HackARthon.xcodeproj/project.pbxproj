@@ -23,6 +23,7 @@
 		897B8CAF22E9F21F003B6969 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 897B8CAE22E9F21F003B6969 /* Info.plist */; };
 		89AFBACA22EA959500772B1D /* ItemTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89AFBAC922EA959500772B1D /* ItemTableViewController.swift */; };
 		89AFBACD22EF589E00772B1D /* HackARthon.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 89AFBACB22EF589E00772B1D /* HackARthon.xcdatamodeld */; };
+		89AFBAD522F1D46700772B1D /* ItemARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89AFBAD422F1D46700772B1D /* ItemARViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		897B8CAE22E9F21F003B6969 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		89AFBAC922EA959500772B1D /* ItemTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTableViewController.swift; sourceTree = "<group>"; };
 		89AFBACC22EF589E00772B1D /* HackARthon.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HackARthon.xcdatamodel; sourceTree = "<group>"; };
+		89AFBAD422F1D46700772B1D /* ItemARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemARViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 				897B8C9D22E9F108003B6969 /* ARViewController.swift */,
 				897B8C9A22E9F108003B6969 /* MapViewController.swift */,
 				89AFBAC922EA959500772B1D /* ItemTableViewController.swift */,
+				89AFBAD422F1D46700772B1D /* ItemARViewController.swift */,
 				897B8C9F22E9F108003B6969 /* Main.storyboard */,
 				897B8C9E22E9F108003B6969 /* LaunchScreen.storyboard */,
 				897B8CA222E9F109003B6969 /* iHeartModel.swift */,
@@ -285,6 +288,7 @@
 			files = (
 				897B8CA322E9F109003B6969 /* MapViewController.swift in Sources */,
 				895138C722EA10A20028BB9C /* HomeModel.swift in Sources */,
+				89AFBAD522F1D46700772B1D /* ItemARViewController.swift in Sources */,
 				89AFBACD22EF589E00772B1D /* HackARthon.xcdatamodeld in Sources */,
 				897B8CAB22E9F109003B6969 /* iHeartModel.swift in Sources */,
 				897B8CA622E9F109003B6969 /* ARViewController.swift in Sources */,
