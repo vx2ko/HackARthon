@@ -31,6 +31,8 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
     let logoRefImageName = ["iheartlogo1","iheartlogo2","iheartlogo3","iheartlogo4","iheartlogo5"]
     let hackathonRefImageName = ["hackathonlogo2", "hackathonlogo"]
     let whataburgerRefImageName = ["whataburgerLogo1","whataburgerLogo2"]
+    let cerealRefImageName = "honeyNutCherrios"
+    let ffCerealRefImage = "FrostedFlakes"
     
     var iHeartLogo = IHeartModel()
     var whataburgerModel = WhataburgerModel()
@@ -88,7 +90,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
         let configuration = ARWorldTrackingConfiguration()
         configuration.planeDetection = .horizontal
         configuration.detectionImages = refImages
-        configuration.maximumNumberOfTrackedImages = 5
+        configuration.maximumNumberOfTrackedImages = 10
         
         // Run the view's session
         sceneView.session.run(configuration)
@@ -175,6 +177,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
             }
         }
         
+        
         for whatLogoName in whataburgerRefImageName {
             if trackedImageName == whatLogoName {
                 let plane = SCNPlane(width: 10, height: 6)
@@ -193,6 +196,57 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
                 node.removeFromParentNode()
                 
             }
+        }
+        
+        if trackedImageName == cerealRefImageName {
+            let imageAnchor = anchor as! ARImageAnchor
+            
+            
+            let referenceImage = imageAnchor.referenceImage
+            
+            //2. Get The Physical Width & Height Of Our Reference Image
+            let width = CGFloat(referenceImage.physicalSize.width)
+            let height = CGFloat(referenceImage.physicalSize.height)
+            
+            //3. Create An SCNNode To Hold Our Video Player
+            let videoHolder = SCNNode()
+            videoHolder.name = "Honey Fuckin Nuts"
+            let planeHeight = height/2
+            let videoHolderGeometry = SCNPlane(width: width, height: planeHeight)
+            videoHolder.transform = SCNMatrix4MakeRotation(-Float.pi / 2, 1, 0, 0)
+            videoHolder.geometry = videoHolderGeometry
+            
+            //4. Place It About The Target
+            let zPosition = height - (planeHeight/2)
+            videoHolder.position = SCNVector3(0, 0, -zPosition)
+            
+            //5. Create Our Video Player
+            if let videoURL = Bundle.main.url(forResource: "art.scnassets/HoneyNutCherrios", withExtension: "mp4"){
+                
+                setupVideoOnNode(videoHolder, fromURL: videoURL)
+            }
+            
+            //5. Add It To The Hierachy
+            node.addChildNode(videoHolder)
+            
+        }
+
+        if trackedImageName == ffCerealRefImage {
+            let plane = SCNPlane(width: 4, height: 6)
+            plane.cornerRadius = 0.5
+            let material = SCNMaterial()
+            
+            material.diffuse.contents = UIImage(named: "art.scnassets/honeyNutCherrios.png")
+            plane.materials = [material]
+            
+            let planeNode = SCNNode(geometry: plane)
+            planeNode.eulerAngles.x = -.pi / 2
+            planeNode.position.y = -2
+            planeNode.name = "ffCerealImage"
+            
+            node.addChildNode(planeNode)
+            node.removeFromParentNode()
+            
         }
         
         return node
@@ -254,6 +308,24 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
         sceneView.scene.rootNode.addChildNode(model)
     }
     
+    func addRollingStonesModel(){
+        let model = RollingStoneModel()
+        model.loadLogo()
+        sceneView.scene.rootNode.addChildNode(model)
+    }
+    
+    func addKJ97Model(){
+        let model = KJ97Model()
+        model.loadLogo()
+        sceneView.scene.rootNode.addChildNode(model)
+    }
+    
+    func addiHeartWingModel(){
+        let model = IheartWingModel()
+        model.loadLogo()
+        sceneView.scene.rootNode.addChildNode(model)
+    }
+    
     //TapGesture handler
     @objc func handleTap(_ gesture: UITapGestureRecognizer) {
         let results = self.sceneView.hitTest(gesture.location(in: gesture.view), types: ARHitTestResult.ResultType.featurePoint)
@@ -281,12 +353,18 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
                 //arCellImageArray.append(UIImage(named: "art.scnassets/emoji.png")!)
                 
                 switch (parentName) {
+                case "Rolling Stones":
+                    let imageName: String! = "art.scnassets/RollingstonesTNx50.png"
+                    save(name: parentName!, imageName: imageName, modelName: "RollingStones")
                 case "iHeartLogo":
                     let imageName: String! = "art.scnassets/iheartwingsTNx50.png"
-                    save(name: parentName!, imageName: imageName, modelName: "iHeart")
-                case "WhataburgerLogo":
-                    let imageName: String! = "art.scnassets/wbTN.png"
-                    save(name: parentName!, imageName: imageName, modelName: "Whataburger")
+                    save(name: parentName!, imageName: imageName, modelName: "iHeartLogo")
+                case "KJ97":
+                    let imageName: String! = "art.scnassets/kj97TNx50.png"
+                    save(name: parentName!, imageName: imageName, modelName: "KJ97")
+                case "iHeartWing":
+                    let imageName: String! = "art.scnassets/iheartwingsTNx50.png"
+                    save(name: parentName!, imageName: imageName, modelName: "iHeartWing")
 
                 default:
                    return
@@ -338,7 +416,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
             case "Work":
                 infoLabel.text = "You are at work"
                 print("regionState is Work")
-                addiHeartModel()
+                addiHeartWingModel()
             case "Home":
                 infoLabel.text = "You are home"
                 print("regionState is home")
@@ -463,6 +541,34 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
         } catch let error {
             print(error.localizedDescription)
         }
+    }
+    
+    func setupVideoOnNode(_ node: SCNNode, fromURL url: URL){
+        
+        //1. Create An SKVideoNode
+        var videoPlayerNode: SKVideoNode!
+        
+        //2. Create An AVPlayer With Our Video URL
+        let videoPlayer = AVPlayer(url: url)
+        
+        //3. Intialize The Video Node With Our Video Player
+        videoPlayerNode = SKVideoNode(avPlayer: videoPlayer)
+        videoPlayerNode.yScale = -1
+        
+        //4. Create A SpriteKitScene & Postion It
+        let spriteKitScene = SKScene(size: CGSize(width: 600, height: 300))
+        spriteKitScene.scaleMode = .aspectFit
+        videoPlayerNode.position = CGPoint(x: spriteKitScene.size.width/2, y: spriteKitScene.size.height/2)
+        videoPlayerNode.size = spriteKitScene.size
+        spriteKitScene.addChild(videoPlayerNode)
+        
+        //6. Set The Nodes Geoemtry Diffuse Contenets To Our SpriteKit Scene
+        node.geometry?.firstMaterial?.diffuse.contents = spriteKitScene
+        
+        //5. Play The Video
+        videoPlayerNode.play()
+        videoPlayer.volume = 0
+        
     }
     
 }

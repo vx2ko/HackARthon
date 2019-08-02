@@ -55,12 +55,22 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     func setupAnnotations(){
         let iHeartAnnotation = CustomAnnotation()
-        let homeAnnotation = CustomAnnotation()
-        let whataburgerAnnotation = CustomAnnotation()
+        let oliveGardenAnnotation = CustomAnnotation()
+        let longhornAnnotation = CustomAnnotation()
+        let greatClipsAnnotation = CustomAnnotation()
+        let targetAnnotation = CustomAnnotation()
+        let kayJewelersAnnotation = CustomAnnotation()
+        let hebAnnotation = CustomAnnotation()
+        let gncAnnotation = CustomAnnotation()
         
         iHeartAnnotation.coordinate = CLLocationCoordinate2DMake(29.647667, -98.453903)
-        homeAnnotation.coordinate = CLLocationCoordinate2DMake(29.529139, -98.404270)
-        whataburgerAnnotation.coordinate = CLLocationCoordinate2DMake(29.636807, -98.454548)
+        oliveGardenAnnotation.coordinate = CLLocationCoordinate2DMake(29.650716, -98.451268)
+        longhornAnnotation.coordinate = CLLocationCoordinate2DMake(29.649638, -98.451776)
+        greatClipsAnnotation.coordinate = CLLocationCoordinate2DMake(29.651393, -98.444868)
+        targetAnnotation.coordinate = CLLocationCoordinate2DMake(29.653628, -98.445020)
+        kayJewelersAnnotation.coordinate = CLLocationCoordinate2DMake(29.655075, -98.446331)
+        hebAnnotation.coordinate = CLLocationCoordinate2DMake(29.641039, -98.457656)
+        gncAnnotation.coordinate = CLLocationCoordinate2DMake(29.642041, -98.456456)
 
         let iHeartURL = URL(string: "https://craig-deployments-mobilehub-1839328609.s3.us-east-2.amazonaws.com/Images/MapImages/iheartwingsTN.png")
         let iHeartData = try? Data(contentsOf: iHeartURL!)
@@ -68,18 +78,75 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let iHeartImageData = iHeartData
         let iHeartAnnotationImage = UIImage(data: iHeartImageData!)
         
-        iHeartAnnotation.title = "iHeartMedia"
-        //iHeartAnnotation.imageName = "art.scnassets/iheartwingsTN.png"
-        iHeartAnnotation.image = iHeartAnnotationImage
-        homeAnnotation.title = "Home"
-        //homeAnnotation.imageName = "art.scnassets/iheartwingsTN.png"
-        whataburgerAnnotation.title = "Whataburger"
-        //whataburgerAnnotation.imageName = "art.scnassets/wbTN.png"
+        let oliveGardenURL = URL(string: "https://craig-deployments-mobilehub-1839328609.s3.us-east-2.amazonaws.com/Images/MapImages/iheartlogoTN.png")
+        let oliveGardenData = try? Data(contentsOf: oliveGardenURL!)
         
+        let oliveGardenImageData = oliveGardenData
+        let oliveGardenAnnotationImage = UIImage(data: oliveGardenImageData!)
+        
+        let longhornURL = URL(string: "https://craig-deployments-mobilehub-1839328609.s3.us-east-2.amazonaws.com/Images/MapImages/kj97TN.png")
+        let longhornData = try? Data(contentsOf: longhornURL!)
+        
+        let longhornImageData = longhornData
+        let longhornAnnotationImage = UIImage(data: longhornImageData!)
+        
+        let greatClipsURL = URL(string: "https://craig-deployments-mobilehub-1839328609.s3.us-east-2.amazonaws.com/Images/MapImages/iheartlogoTN.png")
+        let greatClipsData = try? Data(contentsOf: greatClipsURL!)
+        
+        let greatClipsImageData = greatClipsData
+        let greatClipsAnnotationImage = UIImage(data: greatClipsImageData!)
+        
+        let targetURL = URL(string: "https://craig-deployments-mobilehub-1839328609.s3.us-east-2.amazonaws.com/Images/MapImages/961nowTN.png")
+        let targetData = try? Data(contentsOf: targetURL!)
+        
+        let targetImageData = targetData
+        let targetAnnotationImage = UIImage(data: targetImageData!)
+        
+        let kayJewelersURL = URL(string: "https://craig-deployments-mobilehub-1839328609.s3.us-east-2.amazonaws.com/Images/MapImages/countrypickTN.png")
+        let kayJewelersData = try? Data(contentsOf: kayJewelersURL!)
+        
+        let kayJewelersImageData = kayJewelersData
+        let kayJewelersAnnotationImage = UIImage(data: kayJewelersImageData!)
+        
+        let hebURL = URL(string: "https://craig-deployments-mobilehub-1839328609.s3.us-east-2.amazonaws.com/Images/MapImages/spurTN.png")
+        let hebData = try? Data(contentsOf: hebURL!)
+        
+        let hebImageData = hebData
+        let hebAnnotationImage = UIImage(data: hebImageData!)
+        
+        let gncURL = URL(string: "https://craig-deployments-mobilehub-1839328609.s3.us-east-2.amazonaws.com/Images/MapImages/iheartlogoTN.png")
+        let gncData = try? Data(contentsOf: gncURL!)
+        
+        let gncImageData = gncData
+        let gncAnnotationImage = UIImage(data: gncImageData!)
+        
+        iHeartAnnotation.title = "iHeartMedia"
+        iHeartAnnotation.image = iHeartAnnotationImage
+        oliveGardenAnnotation.title = "Olive Garden"
+        oliveGardenAnnotation.image = oliveGardenAnnotationImage
+        //homeAnnotation.imageName = "art.scnassets/iheartwingsTN.png"
+        longhornAnnotation.title = "Longhorn"
+        longhornAnnotation.image = longhornAnnotationImage
+        greatClipsAnnotation.title = "Great Clips"
+        greatClipsAnnotation.image = greatClipsAnnotationImage
+        targetAnnotation.title = "Target"
+        targetAnnotation.image = targetAnnotationImage
+        kayJewelersAnnotation.title = "Kay Jewelers"
+        kayJewelersAnnotation.image = kayJewelersAnnotationImage
+        hebAnnotation.title = "HEB"
+        hebAnnotation.image = hebAnnotationImage
+        gncAnnotation.title = "GNC"
+        gncAnnotation.image = gncAnnotationImage
         
         mapView.addAnnotation(iHeartAnnotation)
-        mapView.addAnnotation(homeAnnotation)
-        mapView.addAnnotation(whataburgerAnnotation)
+        mapView.addAnnotation(oliveGardenAnnotation)
+        mapView.addAnnotation(longhornAnnotation)
+        mapView.addAnnotation(greatClipsAnnotation)
+        mapView.addAnnotation(targetAnnotation)
+        mapView.addAnnotation(kayJewelersAnnotation)
+        mapView.addAnnotation(hebAnnotation)
+        mapView.addAnnotation(gncAnnotation)
+
 
     }
     
@@ -100,7 +167,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
         let pinImage = annotation as! CustomAnnotation
         annotationView!.image = pinImage.image
-        print(pinImage.image)
+        //print(pinImage.image)
         //annotationView!.image = UIImage(named: pinImage.imageName)
         
         return annotationView

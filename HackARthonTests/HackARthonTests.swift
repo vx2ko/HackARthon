@@ -2,10 +2,12 @@
 //  HackARthonTests.swift
 //  HackARthonTests
 //
-
+//  Created by Kiyano Oben on 7/25/19.
+//  Copyright © 2019 Kiyano Oben. All rights reserved.
+//
 
 import XCTest
-@testable import HackARthon
+//@testable import HackARthon
 
 class HackARthonTests: XCTestCase {
 

@@ -88,6 +88,12 @@ class ItemTableViewController: UITableViewController {
         navigationController?.pushViewController(destination, animated: true)
     }
     
+    @IBAction func sendToContest(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let destination = storyboard.instantiateViewController(withIdentifier: "ContestViewController") as! ContestViewController
+        navigationController?.pushViewController(destination, animated: true)
+    }
+    
    
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
