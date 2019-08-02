@@ -2,9 +2,7 @@
 //  HackARthonUITests.swift
 //  HackARthonUITests
 //
-//  Created by Kiyano Oben on 7/25/19.
-//  Copyright © 2019 Kiyano Oben. All rights reserved.
-//
+
 
 import XCTest
 

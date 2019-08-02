@@ -2,13 +2,14 @@
 //  AppDelegate.swift
 //  ARTest
 //
-//  Created by Kiyano Oben on 6/25/19.
-//  Copyright © 2019 Kiyano Oben. All rights reserved.
-//
+
 
 import UIKit
 import CoreLocation
 import CoreData
+import AWSMobileClient
+import AWSCore
+import AWSS3
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -33,7 +34,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        return true
+        AWSDDLog.add(AWSDDTTYLogger.sharedInstance)
+        AWSDDLog.sharedInstance.logLevel = .info
+        
+        // Create AWSMobileClient to connect with AWS
+        return AWSMobileClient.sharedInstance().interceptApplication(
+            application,
+            didFinishLaunchingWithOptions: launchOptions)
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

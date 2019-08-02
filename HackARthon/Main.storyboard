@@ -312,9 +312,7 @@
         <image name="RadioImage.png" width="1242" height="2688"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="b6m-qr-6Lr"/>
-        <segue reference="H2f-3E-1nI"/>
         <segue reference="7TM-0h-cIq"/>
-        <segue reference="XyJ-97-2oc"/>
+        <segue reference="Ahv-aj-AAn"/>
     </inferredMetricsTieBreakers>
 </document>

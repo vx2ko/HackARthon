@@ -2,9 +2,7 @@
 //  ItemTableViewController.swift
 //  HackARthon
 //
-//  Created by Kiyano Oben on 7/25/19.
-//  Copyright © 2019 Kiyano Oben. All rights reserved.
-//
+
 
 import UIKit
 import CoreData
@@ -13,6 +11,8 @@ class ItemTableViewController: UITableViewController {
     
     
     let arViewVC = ARViewController()
+    let itemARVC = ItemARViewController()
+    var modelName: String!
     //var itemVCArray = [String]()
     //var itemImageArray = [UIImage]()
     //var itemEntityArray = [NSManagedObject]()
@@ -75,16 +75,20 @@ class ItemTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("you tapped row \(indexPath.row)")
+        let item = arViewVC.itemsCDArray[indexPath.row]
+        modelName = item.value(forKeyPath: "modelName") as? String
+        itemARVC.itemName = modelName
+        //print(itemARVC.itemName)
+        
         
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let destination = storyboard.instantiateViewController(withIdentifier: "ItemARViewController") as! ItemARViewController
+
+        destination.itemName = modelName
         navigationController?.pushViewController(destination, animated: true)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-    }
-    
+   
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)

@@ -2,9 +2,7 @@
 //  MapViewController.swift
 //  ARTest
 //
-//  Created by Kiyano Oben on 7/24/19.
-//  Copyright © 2019 Kiyano Oben. All rights reserved.
-//
+
 
 import UIKit
 import MapKit
@@ -12,6 +10,8 @@ import CoreLocation
 
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
 
+    var imageNew: UIImage = UIImage()
+    
     @IBOutlet weak var mapView: MKMapView!
     var locationManager: CLLocationManager = CLLocationManager()
     
@@ -54,22 +54,56 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     func setupAnnotations(){
-        let iHeartAnnotation = MKPointAnnotation()
-        let homeAnnotation = MKPointAnnotation()
-        let whataburgerAnnotation = MKPointAnnotation()
+        let iHeartAnnotation = CustomAnnotation()
+        let homeAnnotation = CustomAnnotation()
+        let whataburgerAnnotation = CustomAnnotation()
         
         iHeartAnnotation.coordinate = CLLocationCoordinate2DMake(29.647667, -98.453903)
         homeAnnotation.coordinate = CLLocationCoordinate2DMake(29.529139, -98.404270)
         whataburgerAnnotation.coordinate = CLLocationCoordinate2DMake(29.636807, -98.454548)
 
+        let iHeartURL = URL(string: "https://craig-deployments-mobilehub-1839328609.s3.us-east-2.amazonaws.com/Images/MapImages/iheartwingsTN.png")
+        let iHeartData = try? Data(contentsOf: iHeartURL!)
+        
+        let iHeartImageData = iHeartData
+        let iHeartAnnotationImage = UIImage(data: iHeartImageData!)
+        
         iHeartAnnotation.title = "iHeartMedia"
+        //iHeartAnnotation.imageName = "art.scnassets/iheartwingsTN.png"
+        iHeartAnnotation.image = iHeartAnnotationImage
         homeAnnotation.title = "Home"
+        //homeAnnotation.imageName = "art.scnassets/iheartwingsTN.png"
         whataburgerAnnotation.title = "Whataburger"
+        //whataburgerAnnotation.imageName = "art.scnassets/wbTN.png"
+        
         
         mapView.addAnnotation(iHeartAnnotation)
         mapView.addAnnotation(homeAnnotation)
         mapView.addAnnotation(whataburgerAnnotation)
 
+    }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if !(annotation is CustomAnnotation) {
+            return nil
+        }
+        
+        let annotationIdentifier = "iheartAnnotation"
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationIdentifier)
+        
+        if annotationView == nil {
+            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
+            annotationView!.canShowCallout = true
+        }
+        else {
+            annotationView!.annotation = annotation
+        }
+        let pinImage = annotation as! CustomAnnotation
+        annotationView!.image = pinImage.image
+        print(pinImage.image)
+        //annotationView!.image = UIImage(named: pinImage.imageName)
+        
+        return annotationView
     }
     
 }

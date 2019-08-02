@@ -2,9 +2,7 @@
 //  Mcjag.swift
 //  ARTest
 //
-//  Created by Kiyano Oben on 7/17/19.
-//  Copyright © 2019 Kiyano Oben. All rights reserved.
-//
+
 
 import Foundation
 import ARKit
@@ -30,7 +28,7 @@ class WhataburgerModel: SCNNode {
         let position = SCNVector3Make(xPos, -0.75, zPos)
         
         self.position = position
-        logoNode.name = "Whataburger Logo"
+        logoNode.name = "WhataburgerLogo"
 
         self.addChildNode(logoNode)
     }

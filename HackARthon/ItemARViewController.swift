@@ -2,9 +2,7 @@
 //  ItemARViewController.swift
 //  HackARthon
 //
-//  Created by Kiyano Oben on 7/31/19.
-//  Copyright © 2019 Kiyano Oben. All rights reserved.
-//
+
 
 import UIKit
 import ARKit
@@ -16,6 +14,12 @@ class ItemARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelega
     @IBOutlet weak var testLabel: UILabel!
     @IBOutlet var itemSceneView: SCNView!
     
+    
+    //let itemTableVC = ItemTableViewController()
+    var iHeartLogo = IHeartModel()
+    var whataburgerModel = WhataburgerModel()
+    var itemName: String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,9 +27,16 @@ class ItemARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelega
         
         itemSceneView.autoenablesDefaultLighting = true
         itemSceneView.allowsCameraControl = true
+        print(itemName)
+        switch (itemName){
+        case "iHeart":
+            addiHeartModel()
+        case "Whataburger":
+            addWhataburgerModel()
+        default:
+            return
+        }
 
-        setScene()
-        
         // Do any additional setup after loading the view.
     }
     
@@ -49,7 +60,7 @@ class ItemARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelega
         // Pause the view's session
     }
 
-    func setScene(){
+    func addiHeartModel(){
         guard let logoSceneObject = SCNScene(named: "art.scnassets/iheart3dV2.scn") else {return}
         let logoNode = SCNNode()
         
@@ -60,9 +71,22 @@ class ItemARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelega
         
         logoSceneObject.rootNode.addChildNode(logoNode)
         itemSceneView.scene = logoSceneObject
-
     }
     
+    func addWhataburgerModel(){
+        guard let logoSceneObject = SCNScene(named: "art.scnassets/whataburgerv3.scn") else {return}
+        let logoNode = SCNNode()
+        
+        for logoChild in logoSceneObject.rootNode.childNodes {
+            logoNode.childNode(withName: "itemModel", recursively: true)
+            logoNode.addChildNode(logoChild)
+        }
+        
+        logoSceneObject.rootNode.addChildNode(logoNode)
+        itemSceneView.scene = logoSceneObject
+    }
+    
+   
     /*
     // MARK: - Navigation
 

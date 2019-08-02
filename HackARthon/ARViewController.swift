@@ -1,16 +1,16 @@
 //
 //  ViewController.swift
 //  ARTest
-//
-//  Created by Kiyano Oben on 6/25/19.
-//  Copyright © 2019 Kiyano Oben. All rights reserved.
-//
+
 
 import UIKit
 import SceneKit
 import ARKit
 import CoreLocation
 import CoreData
+import AVFoundation
+import AWSDynamoDB
+import AWSMobileClient
 
 class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, CLLocationManagerDelegate {
     
@@ -22,7 +22,8 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
     var arVCItemArray = [String]()
     var arCellImageArray = [UIImage]()
     var itemsCDArray = [NSManagedObject]()
-//    let itemTableVC = ItemTableViewController()
+    var objPlayer: AVAudioPlayer?
+    var parentName: String?
     var locationManager: CLLocationManager = CLLocationManager()
     let iHeartGeoFenceCenter = CLLocationCoordinate2DMake(29.647751, -98.453967)
     let homeGeoFenceCenter = CLLocationCoordinate2DMake(29.529139, -98.404270)
@@ -121,7 +122,9 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
 //        let rotateOne = SCNAction.rotateBy(x: 0, y: CGFloat(Float.pi), z: 0, duration: 2.0)
         let rotateOne = SCNAction.rotateBy(x: 0, y: 10, z: 0, duration: 0.5)
 
-        node.runAction(rotateOne)
+        node.runAction(rotateOne, completionHandler: {
+            node.parent?.isHidden = true
+        })
     }
     
     //When scene is rendered
@@ -267,26 +270,27 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
             let parentName = nodeParent?.name
             
             if let node = tappedNode.first?.node as SCNNode? {
-                addAnimation(node: nodeParent!)
+                playAudioFile()
+                addAnimation(node: node)
                 itemLabel.isHidden = false
                 itemLabel.text = ("You got \(parentName!)")
 
                 //itemTableViewController.itemArray.append(parentName!)
                 //arVCItemArray.append(parentName!)
-                let imageName: String! = "art.scnassets/itemImage.png"
-                save(name: parentName!, imageName: imageName)
+                
                 //arCellImageArray.append(UIImage(named: "art.scnassets/emoji.png")!)
                 
-//                switch (parentName!) {
-//                case "iHeartModel":
-//                    arCellImageArray.append(UIImage(named: "art.scnassets/emoji.png")!)
-//                case "whataburgerModel":
-//                    arCellImageArray.append(UIImage(named: "art.scnassets/emoji.png")!)
-//                case "homeModel":
-//                    arCellImageArray.append(UIImage(named: "art.scnassets/emoji.png")!)
-//                default:
-//                    return
-//                }
+                switch (parentName) {
+                case "iHeartLogo":
+                    let imageName: String! = "art.scnassets/iheartwingsTNx50.png"
+                    save(name: parentName!, imageName: imageName, modelName: "iHeart")
+                case "WhataburgerLogo":
+                    let imageName: String! = "art.scnassets/wbTN.png"
+                    save(name: parentName!, imageName: imageName, modelName: "Whataburger")
+
+                default:
+                   return
+                }
                 
             }
 
@@ -409,7 +413,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
         
     }
     
-    func save(name: String, imageName: String) {
+    func save(name: String, imageName: String, modelName: String) {
         
         guard let appDelegate =
             UIApplication.shared.delegate as? AppDelegate else {
@@ -431,6 +435,8 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
         // 3
         item.setValue(name, forKeyPath: "name")
         item.setValue(imageName, forKeyPath: "imageName")
+        item.setValue(modelName, forKeyPath: "modelName")
+
         
         // 4
         do {
@@ -438,6 +444,24 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
             itemsCDArray.append(item)
         } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")
+        }
+    }
+    
+    func playAudioFile() {
+        guard let url = Bundle.main.url(forResource: "art.scnassets/SeinfeldTheme", withExtension: "mp3") else { return }
+        
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
+            try AVAudioSession.sharedInstance().setActive(true)
+            
+            // For iOS 11
+            objPlayer = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.mp3.rawValue)
+           
+            guard let aPlayer = objPlayer else { return }
+            aPlayer.play()
+            
+        } catch let error {
+            print(error.localizedDescription)
         }
     }
     
