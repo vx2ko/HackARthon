@@ -125,20 +125,6 @@
                                     <segue destination="Wob-HQ-mri" kind="presentation" identifier="segueToItems" modalTransitionStyle="flipHorizontal" id="Mz8-5R-zo0"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mYE-BR-KlP">
-                                <rect key="frame" x="20" y="44" width="374" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E8f-Qu-mfG">
-                                <rect key="frame" x="20" y="73" width="374" height="48"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D7u-hV-Gu5">
                                 <rect key="frame" x="325" y="762" width="69" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -182,8 +168,6 @@
                         <viewLayoutGuide key="safeArea" id="fQZ-KI-GVf"/>
                     </view>
                     <connections>
-                        <outlet property="distanceLabel" destination="E8f-Qu-mfG" id="8qI-Pj-keS"/>
-                        <outlet property="infoLabel" destination="mYE-BR-KlP" id="mkm-gk-IDh"/>
                         <outlet property="itemLabel" destination="Hpx-g3-Jn9" id="NbM-fv-bFb"/>
                         <outlet property="sceneView" destination="BrB-h1-WRS" id="1Qp-Kv-zIZ"/>
                     </connections>
@@ -484,6 +468,7 @@
         <image name="wbTN.png" width="24" height="22.799999237060547"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="H2f-3E-1nI"/>
         <segue reference="9jd-ia-MWs"/>
         <segue reference="XyJ-97-2oc"/>
     </inferredMetricsTieBreakers>

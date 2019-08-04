@@ -15,8 +15,8 @@ import AWSMobileClient
 class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, CLLocationManagerDelegate {
     
     @IBOutlet var sceneView: ARSCNView!
-    @IBOutlet weak var infoLabel: UILabel!
-    @IBOutlet weak var distanceLabel: UILabel!
+    //@IBOutlet weak var infoLabel: UILabel!
+    //@IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var itemLabel: UILabel!
     
     var arVCItemArray = [String]()
@@ -157,27 +157,6 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
         }
         
         //Checks reference image for Hackathon logo
-        for hackLogoName in hackathonRefImageName {
-            if trackedImageName == hackLogoName {
-                let plane = SCNPlane(width: 5, height: 5)
-                let material = SCNMaterial()
-                
-                material.diffuse.contents = UIImage(named: "art.scnassets/emoji.png")
-                plane.materials = [material]
-                
-                let planeNode = SCNNode(geometry: plane)
-                planeNode.eulerAngles.x = -.pi / 2
-                planeNode.position.z = -3
-                planeNode.position.y = -2
-                planeNode.name = "hackathonImage"
-                
-                node.addChildNode(planeNode)
-                node.removeFromParentNode()
-
-            }
-        }
-        
-        
         for whatLogoName in whataburgerRefImageName {
             if trackedImageName == whatLogoName {
                 let plane = SCNPlane(width: 10, height: 6)
@@ -210,7 +189,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
             
             //3. Create An SCNNode To Hold Our Video Player
             let videoHolder = SCNNode()
-            videoHolder.name = "Honey Fuckin Nuts"
+            videoHolder.name = "Honey Nut Cheerios"
             let planeHeight = height/2
             let videoHolderGeometry = SCNPlane(width: width, height: planeHeight)
             videoHolder.transform = SCNMatrix4MakeRotation(-Float.pi / 2, 1, 0, 0)
@@ -243,6 +222,36 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
             planeNode.eulerAngles.x = -.pi / 2
             planeNode.position.y = -2
             planeNode.name = "ffCerealImage"
+            
+            let imageAnchor = anchor as! ARImageAnchor
+            
+            
+            let referenceImage = imageAnchor.referenceImage
+            
+            //2. Get The Physical Width & Height Of Our Reference Image
+            let width = CGFloat(referenceImage.physicalSize.width)
+            let height = CGFloat(referenceImage.physicalSize.height)
+            
+            //3. Create An SCNNode To Hold Our Video Player
+            let videoHolder = SCNNode()
+            videoHolder.name = "Honey Fuckin Nuts"
+            let planeHeight = height/2
+            let videoHolderGeometry = SCNPlane(width: width, height: planeHeight)
+            videoHolder.transform = SCNMatrix4MakeRotation(-Float.pi / 2, 1, 0, 0)
+            videoHolder.geometry = videoHolderGeometry
+            
+            //4. Place It About The Target
+            let zPosition = height - (planeHeight/2)
+            videoHolder.position = SCNVector3(0, 0, -zPosition)
+            
+            //5. Create Our Video Player
+            if let videoURL = Bundle.main.url(forResource: "art.scnassets/HoneyNutCherrios", withExtension: "mp4"){
+                
+                setupVideoOnNode(videoHolder, fromURL: videoURL)
+            }
+            
+            //5. Add It To The Hierachy
+            node.addChildNode(videoHolder)
             
             node.addChildNode(planeNode)
             node.removeFromParentNode()
@@ -414,15 +423,15 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
         if state == CLRegionState.inside{
             switch region.identifier {
             case "Work":
-                infoLabel.text = "You are at work"
+                //infoLabel.text = "You are at work"
                 print("regionState is Work")
                 addiHeartWingModel()
             case "Home":
-                infoLabel.text = "You are home"
+                //infoLabel.text = "You are home"
                 print("regionState is home")
                 addHomeModel()
             case "Whataburger":
-                infoLabel.text = "You are at Whataburger"
+                //infoLabel.text = "You are at Whataburger"
                 print("regionState is Whataburger")
                 addWhataburgerModel()
             default:
@@ -436,19 +445,19 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
         switch region.identifier {
         case "Work":
-            infoLabel.text = "You are at work"
+            //infoLabel.text = "You are at work"
             print("regionState is Work")
             addiHeartModel()
         case "Home":
-            infoLabel.text = "You are home"
+            //infoLabel.text = "You are home"
             print("regionState is home")
             addHomeModel()
         case "Whataburger":
-            infoLabel.text = "You are at Whataburger"
+            //infoLabel.text = "You are at Whataburger"
             print("regionState is Whataburger")
             addWhataburgerModel()
         case "Random Location":
-            infoLabel.text = "You are somewhere mysterious"
+            //infoLabel.text = "You are somewhere mysterious"
             addWhataburgerModel()
         default:
             return
@@ -459,16 +468,16 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
     func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
         switch region.identifier {
         case "Work":
-            infoLabel.text = "You are leaving work"
+            //infoLabel.text = "You are leaving work"
             removeiHeartModel()
         case "Home":
-            infoLabel.text = "You are leaving home"
+            //infoLabel.text = "You are leaving home"
             removeHomeModel()
         case "Whataburger":
-            infoLabel.text = "You are leaving Whataburger"
+            //infoLabel.text = "You are leaving Whataburger"
             removeWhataburgerModel()
         case "Random Location":
-            infoLabel.text = "You are leaving the mysterious place"
+            //infoLabel.text = "You are leaving the mysterious place"
             removeWhataburgerModel()
         default:
             return
@@ -486,7 +495,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
         let home = CLLocation(latitude: 29.647667, longitude: -98.453903)
         let location = manager.location
         let distance = location?.distance(from: home)
-        distanceLabel.text = "\(distance!)"
+        //distanceLabel.text = "\(distance!)"
         print("\(distance!)")
         
     }
