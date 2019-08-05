@@ -24,7 +24,6 @@ class CustomMapAnnotation: MKPointAnnotation {
         
         self.title = annotationName
         self.image = annotationImage
-        print("Test")
         
     }
     
