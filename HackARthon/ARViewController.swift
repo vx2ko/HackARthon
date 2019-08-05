@@ -9,8 +9,6 @@ import ARKit
 import CoreLocation
 import CoreData
 import AVFoundation
-import AWSDynamoDB
-import AWSMobileClient
 
 class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, CLLocationManagerDelegate {
     
