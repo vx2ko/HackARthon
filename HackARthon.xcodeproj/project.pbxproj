@@ -132,18 +132,18 @@
 				897B8C9A22E9F108003B6969 /* MapViewController.swift */,
 				89AFBAC922EA959500772B1D /* ItemTableViewController.swift */,
 				89AFBAD422F1D46700772B1D /* ItemARViewController.swift */,
+				898526B922F74AFD007CFE4A /* CustomMapAnnotation.swift */,
+				898526B122F4022D007CFE4A /* RollingStonesModel.swift */,
 				898526B322F40D91007CFE4A /* KJ97.swift */,
 				898526B522F41344007CFE4A /* IheartWingsModel.swift */,
-				897B8C9F22E9F108003B6969 /* Main.storyboard */,
 				898526B722F41E82007CFE4A /* ContestViewController.swift */,
-				897B8C9E22E9F108003B6969 /* LaunchScreen.storyboard */,
 				897B8CA222E9F109003B6969 /* iHeartModel.swift */,
 				897B8CA022E9F108003B6969 /* WhataburgerModel.swift */,
 				895138C622EA10A20028BB9C /* HomeModel.swift */,
-				898526B922F74AFD007CFE4A /* CustomMapAnnotation.swift */,
 				897B8CA122E9F109003B6969 /* Info.plist */,
 				89AFBACB22EF589E00772B1D /* HackARthon.xcdatamodeld */,
-				898526B122F4022D007CFE4A /* RollingStonesModel.swift */,
+				897B8C9F22E9F108003B6969 /* Main.storyboard */,
+				897B8C9E22E9F108003B6969 /* LaunchScreen.storyboard */,
 			);
 			path = HackARthon;
 			sourceTree = "<group>";
