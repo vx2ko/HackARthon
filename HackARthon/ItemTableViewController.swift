@@ -95,11 +95,32 @@ class ItemTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+        
+        let managedContext =
+            appDelegate.persistentContainer.viewContext
+        
+        let fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: "Item")
+        
+        do {
+            arViewVC.itemsCDArray = try managedContext.fetch(fetchRequest)
+            print(arViewVC.itemsCDArray)
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        
         if editingStyle == .delete {
             print("Deleted")
-            
+            print(arViewVC.itemsCDArray)
+            managedContext.delete(arViewVC.itemsCDArray[indexPath.row] as NSManagedObject)
             arViewVC.itemsCDArray.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
+            
+
         }
     }
    
