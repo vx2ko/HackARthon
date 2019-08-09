@@ -577,5 +577,4 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
         videoPlayer.volume = 0
         
     }
-    
 }
