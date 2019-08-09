@@ -49,7 +49,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.activityType = CLActivityType.fitness
+        locationManager.distanceFilter = 5
         
         UIApplication.shared.isIdleTimerDisabled = true
         
@@ -60,7 +60,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
         
         //Set lighting
         configureLighting()
-
+        
     }
     
     //Hide status bar
@@ -415,7 +415,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
     func locationManager(_ manager: CLLocationManager, didStartMonitoringFor region: CLRegion) {
         print("Monitoring \(region.identifier)")
     }
-    
+        
     func locationManager(_ manager: CLLocationManager, didDetermineState state: CLRegionState, for region: CLRegion) {
         
         if state == CLRegionState.inside{
