@@ -1,0 +1,11 @@
+{
+	"api": {
+		"hackarthon": {
+			"service": "AppSync",
+			"providerPlugin": "awscloudformation",
+			"output": {
+				"securityType": "API_KEY"
+			}
+		}
+	}
+}

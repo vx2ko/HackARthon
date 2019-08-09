@@ -1,0 +1,14 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "hackarthon-dev-20190809141710-authRole",
+            "UnauthRoleArn": "arn:aws:iam::640046121157:role/hackarthon-dev-20190809141710-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::640046121157:role/hackarthon-dev-20190809141710-authRole",
+            "Region": "us-west-2",
+            "DeploymentBucketName": "hackarthon-dev-20190809141710-deployment",
+            "UnauthRoleName": "hackarthon-dev-20190809141710-unauthRole",
+            "StackName": "hackarthon-dev-20190809141710",
+            "StackId": "arn:aws:cloudformation:us-west-2:640046121157:stack/hackarthon-dev-20190809141710/49e852f0-bada-11e9-9b3c-02a485342252"
+        }
+    }
+}

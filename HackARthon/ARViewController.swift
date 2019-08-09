@@ -9,6 +9,7 @@ import ARKit
 import CoreLocation
 import CoreData
 import AVFoundation
+import AWSAppSync
 
 class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, CLLocationManagerDelegate {
     
@@ -36,8 +37,12 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
     var whataburgerModel = WhataburgerModel()
     var homeModel = HomeModel()
     
+    var appSyncClient: AWSAppSyncClient?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appSyncClient = appDelegate.appSyncClient
         
         // Set the view's delegate
         sceneView.delegate = self
@@ -60,6 +65,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
         
         //Set lighting
         configureLighting()
+        runMutation()
         
     }
     
@@ -576,5 +582,29 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
         videoPlayerNode.play()
         videoPlayer.volume = 0
         
+    }
+    
+    func runMutation(){
+        let mutationInput = CreateLocationInput(id: "0", name: "iHeart", long: 23.9595, lat: -98.73474, modelName: "iHeart.dae", imageName: "iHeart.png")
+        appSyncClient?.perform(mutation: CreateLocationMutation(input: mutationInput)) { (result, error) in
+            if let error = error as? AWSAppSyncClientError {
+                print("Error occurred: \(error.localizedDescription )")
+            }
+            if let resultError = result?.errors {
+                print("Error saving the item on server: \(resultError)")
+                return
+            }
+            self.runQuery()
+        }
+    }
+    
+    func runQuery(){
+        appSyncClient?.fetch(query: ListLocationsQuery(), cachePolicy: .returnCacheDataAndFetch) {(result, error) in
+            if error != nil {
+                print(error?.localizedDescription ?? "")
+                return
+            }
+            result?.data?.listLocations?.items!.forEach { print(($0?.name)! + " " + ($0?.name)!) }
+        }
     }
 }

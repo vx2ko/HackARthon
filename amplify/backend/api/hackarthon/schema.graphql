@@ -1,0 +1,9 @@
+type Location @model {
+  id: ID!
+  name: String!
+  long: Int
+  lat: Int
+  modelName: String
+  imageName: String
+}
+

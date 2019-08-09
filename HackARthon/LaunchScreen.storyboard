@@ -18,11 +18,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="SplashScreen.png" translatesAutoresizingMaskIntoConstraints="NO" id="8Q2-Zj-Km4">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashScreen.png" translatesAutoresizingMaskIntoConstraints="NO" id="SEp-by-oO6">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="SEp-by-oO6" secondAttribute="trailing" id="FQj-2j-EGX"/>
+                            <constraint firstItem="SEp-by-oO6" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="M6w-pH-aRt"/>
+                            <constraint firstAttribute="bottom" secondItem="SEp-by-oO6" secondAttribute="bottom" id="VNG-gS-dV8"/>
+                            <constraint firstItem="SEp-by-oO6" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="iI0-qV-jsM"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>

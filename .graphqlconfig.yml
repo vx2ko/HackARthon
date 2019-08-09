@@ -1,0 +1,14 @@
+projects:
+  hackarthon-dev:
+    schemaPath: graphql/schema.json
+    includes:
+      - graphql/**/*.graphql
+    excludes:
+      - ./amplify/**
+    extensions:
+      amplify:
+        codeGenTarget: swift
+        generatedFileName: APINew.swift
+        docsFilePath: graphql
+        region: us-west-2
+        maxDepth: 2
