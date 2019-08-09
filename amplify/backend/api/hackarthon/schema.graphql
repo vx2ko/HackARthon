@@ -1,8 +1,8 @@
 type Location @model {
   id: ID!
   name: String!
-  long: Int
-  lat: Int
+  long: Float
+  lat: Float
   modelName: String
   imageName: String
 }

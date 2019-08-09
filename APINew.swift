@@ -67,7 +67,7 @@ public struct CreateLocationInput: GraphQLMapConvertible {
 public struct UpdateLocationInput: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
-  public init(id: GraphQLID, name: String? = nil, long: Int? = nil, lat: Int? = nil, modelName: String? = nil, imageName: String? = nil) {
+  public init(id: GraphQLID, name: String? = nil, long: Double? = nil, lat: Double? = nil, modelName: String? = nil, imageName: String? = nil) {
     graphQLMap = ["id": id, "name": name, "long": long, "lat": lat, "modelName": modelName, "imageName": imageName]
   }
 
@@ -89,18 +89,18 @@ public struct UpdateLocationInput: GraphQLMapConvertible {
     }
   }
 
-  public var long: Int? {
+  public var long: Double? {
     get {
-      return graphQLMap["long"] as! Int?
+      return graphQLMap["long"] as! Double?
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "long")
     }
   }
 
-  public var lat: Int? {
+  public var lat: Double? {
     get {
-      return graphQLMap["lat"] as! Int?
+      return graphQLMap["lat"] as! Double?
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "lat")
@@ -146,7 +146,7 @@ public struct DeleteLocationInput: GraphQLMapConvertible {
 public struct ModelLocationFilterInput: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
-  public init(id: ModelIDFilterInput? = nil, name: ModelStringFilterInput? = nil, long: ModelIntFilterInput? = nil, lat: ModelIntFilterInput? = nil, modelName: ModelStringFilterInput? = nil, imageName: ModelStringFilterInput? = nil, and: [ModelLocationFilterInput?]? = nil, or: [ModelLocationFilterInput?]? = nil, not: ModelLocationFilterInput? = nil) {
+  public init(id: ModelIDFilterInput? = nil, name: ModelStringFilterInput? = nil, long: ModelFloatFilterInput? = nil, lat: ModelFloatFilterInput? = nil, modelName: ModelStringFilterInput? = nil, imageName: ModelStringFilterInput? = nil, and: [ModelLocationFilterInput?]? = nil, or: [ModelLocationFilterInput?]? = nil, not: ModelLocationFilterInput? = nil) {
     graphQLMap = ["id": id, "name": name, "long": long, "lat": lat, "modelName": modelName, "imageName": imageName, "and": and, "or": or, "not": not]
   }
 
@@ -168,18 +168,18 @@ public struct ModelLocationFilterInput: GraphQLMapConvertible {
     }
   }
 
-  public var long: ModelIntFilterInput? {
+  public var long: ModelFloatFilterInput? {
     get {
-      return graphQLMap["long"] as! ModelIntFilterInput?
+      return graphQLMap["long"] as! ModelFloatFilterInput?
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "long")
     }
   }
 
-  public var lat: ModelIntFilterInput? {
+  public var lat: ModelFloatFilterInput? {
     get {
-      return graphQLMap["lat"] as! ModelIntFilterInput?
+      return graphQLMap["lat"] as! ModelFloatFilterInput?
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "lat")
@@ -428,88 +428,88 @@ public struct ModelStringFilterInput: GraphQLMapConvertible {
   }
 }
 
-public struct ModelIntFilterInput: GraphQLMapConvertible {
+public struct ModelFloatFilterInput: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
-  public init(ne: Int? = nil, eq: Int? = nil, le: Int? = nil, lt: Int? = nil, ge: Int? = nil, gt: Int? = nil, contains: Int? = nil, notContains: Int? = nil, between: [Int?]? = nil) {
+  public init(ne: Double? = nil, eq: Double? = nil, le: Double? = nil, lt: Double? = nil, ge: Double? = nil, gt: Double? = nil, contains: Double? = nil, notContains: Double? = nil, between: [Double?]? = nil) {
     graphQLMap = ["ne": ne, "eq": eq, "le": le, "lt": lt, "ge": ge, "gt": gt, "contains": contains, "notContains": notContains, "between": between]
   }
 
-  public var ne: Int? {
+  public var ne: Double? {
     get {
-      return graphQLMap["ne"] as! Int?
+      return graphQLMap["ne"] as! Double?
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "ne")
     }
   }
 
-  public var eq: Int? {
+  public var eq: Double? {
     get {
-      return graphQLMap["eq"] as! Int?
+      return graphQLMap["eq"] as! Double?
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "eq")
     }
   }
 
-  public var le: Int? {
+  public var le: Double? {
     get {
-      return graphQLMap["le"] as! Int?
+      return graphQLMap["le"] as! Double?
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "le")
     }
   }
 
-  public var lt: Int? {
+  public var lt: Double? {
     get {
-      return graphQLMap["lt"] as! Int?
+      return graphQLMap["lt"] as! Double?
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "lt")
     }
   }
 
-  public var ge: Int? {
+  public var ge: Double? {
     get {
-      return graphQLMap["ge"] as! Int?
+      return graphQLMap["ge"] as! Double?
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "ge")
     }
   }
 
-  public var gt: Int? {
+  public var gt: Double? {
     get {
-      return graphQLMap["gt"] as! Int?
+      return graphQLMap["gt"] as! Double?
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "gt")
     }
   }
 
-  public var contains: Int? {
+  public var contains: Double? {
     get {
-      return graphQLMap["contains"] as! Int?
+      return graphQLMap["contains"] as! Double?
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "contains")
     }
   }
 
-  public var notContains: Int? {
+  public var notContains: Double? {
     get {
-      return graphQLMap["notContains"] as! Int?
+      return graphQLMap["notContains"] as! Double?
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "notContains")
     }
   }
 
-  public var between: [Int?]? {
+  public var between: [Double?]? {
     get {
-      return graphQLMap["between"] as! [Int?]?
+      return graphQLMap["between"] as! [Double?]?
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "between")
@@ -564,8 +564,8 @@ public final class CreateLocationMutation: GraphQLMutation {
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
         GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
         GraphQLField("name", type: .nonNull(.scalar(String.self))),
-        GraphQLField("long", type: .scalar(Int.self)),
-        GraphQLField("lat", type: .scalar(Int.self)),
+        GraphQLField("long", type: .scalar(Double.self)),
+        GraphQLField("lat", type: .scalar(Double.self)),
         GraphQLField("modelName", type: .scalar(String.self)),
         GraphQLField("imageName", type: .scalar(String.self)),
       ]
@@ -576,7 +576,7 @@ public final class CreateLocationMutation: GraphQLMutation {
         self.snapshot = snapshot
       }
 
-      public init(id: GraphQLID, name: String, long: Int? = nil, lat: Int? = nil, modelName: String? = nil, imageName: String? = nil) {
+      public init(id: GraphQLID, name: String, long: Double? = nil, lat: Double? = nil, modelName: String? = nil, imageName: String? = nil) {
         self.init(snapshot: ["__typename": "Location", "id": id, "name": name, "long": long, "lat": lat, "modelName": modelName, "imageName": imageName])
       }
 
@@ -607,18 +607,18 @@ public final class CreateLocationMutation: GraphQLMutation {
         }
       }
 
-      public var long: Int? {
+      public var long: Double? {
         get {
-          return snapshot["long"] as? Int
+          return snapshot["long"] as? Double
         }
         set {
           snapshot.updateValue(newValue, forKey: "long")
         }
       }
 
-      public var lat: Int? {
+      public var lat: Double? {
         get {
-          return snapshot["lat"] as? Int
+          return snapshot["lat"] as? Double
         }
         set {
           snapshot.updateValue(newValue, forKey: "lat")
@@ -693,8 +693,8 @@ public final class UpdateLocationMutation: GraphQLMutation {
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
         GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
         GraphQLField("name", type: .nonNull(.scalar(String.self))),
-        GraphQLField("long", type: .scalar(Int.self)),
-        GraphQLField("lat", type: .scalar(Int.self)),
+        GraphQLField("long", type: .scalar(Double.self)),
+        GraphQLField("lat", type: .scalar(Double.self)),
         GraphQLField("modelName", type: .scalar(String.self)),
         GraphQLField("imageName", type: .scalar(String.self)),
       ]
@@ -705,7 +705,7 @@ public final class UpdateLocationMutation: GraphQLMutation {
         self.snapshot = snapshot
       }
 
-      public init(id: GraphQLID, name: String, long: Int? = nil, lat: Int? = nil, modelName: String? = nil, imageName: String? = nil) {
+      public init(id: GraphQLID, name: String, long: Double? = nil, lat: Double? = nil, modelName: String? = nil, imageName: String? = nil) {
         self.init(snapshot: ["__typename": "Location", "id": id, "name": name, "long": long, "lat": lat, "modelName": modelName, "imageName": imageName])
       }
 
@@ -736,18 +736,18 @@ public final class UpdateLocationMutation: GraphQLMutation {
         }
       }
 
-      public var long: Int? {
+      public var long: Double? {
         get {
-          return snapshot["long"] as? Int
+          return snapshot["long"] as? Double
         }
         set {
           snapshot.updateValue(newValue, forKey: "long")
         }
       }
 
-      public var lat: Int? {
+      public var lat: Double? {
         get {
-          return snapshot["lat"] as? Int
+          return snapshot["lat"] as? Double
         }
         set {
           snapshot.updateValue(newValue, forKey: "lat")
@@ -822,8 +822,8 @@ public final class DeleteLocationMutation: GraphQLMutation {
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
         GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
         GraphQLField("name", type: .nonNull(.scalar(String.self))),
-        GraphQLField("long", type: .scalar(Int.self)),
-        GraphQLField("lat", type: .scalar(Int.self)),
+        GraphQLField("long", type: .scalar(Double.self)),
+        GraphQLField("lat", type: .scalar(Double.self)),
         GraphQLField("modelName", type: .scalar(String.self)),
         GraphQLField("imageName", type: .scalar(String.self)),
       ]
@@ -834,7 +834,7 @@ public final class DeleteLocationMutation: GraphQLMutation {
         self.snapshot = snapshot
       }
 
-      public init(id: GraphQLID, name: String, long: Int? = nil, lat: Int? = nil, modelName: String? = nil, imageName: String? = nil) {
+      public init(id: GraphQLID, name: String, long: Double? = nil, lat: Double? = nil, modelName: String? = nil, imageName: String? = nil) {
         self.init(snapshot: ["__typename": "Location", "id": id, "name": name, "long": long, "lat": lat, "modelName": modelName, "imageName": imageName])
       }
 
@@ -865,18 +865,18 @@ public final class DeleteLocationMutation: GraphQLMutation {
         }
       }
 
-      public var long: Int? {
+      public var long: Double? {
         get {
-          return snapshot["long"] as? Int
+          return snapshot["long"] as? Double
         }
         set {
           snapshot.updateValue(newValue, forKey: "long")
         }
       }
 
-      public var lat: Int? {
+      public var lat: Double? {
         get {
-          return snapshot["lat"] as? Int
+          return snapshot["lat"] as? Double
         }
         set {
           snapshot.updateValue(newValue, forKey: "lat")
@@ -951,8 +951,8 @@ public final class GetLocationQuery: GraphQLQuery {
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
         GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
         GraphQLField("name", type: .nonNull(.scalar(String.self))),
-        GraphQLField("long", type: .scalar(Int.self)),
-        GraphQLField("lat", type: .scalar(Int.self)),
+        GraphQLField("long", type: .scalar(Double.self)),
+        GraphQLField("lat", type: .scalar(Double.self)),
         GraphQLField("modelName", type: .scalar(String.self)),
         GraphQLField("imageName", type: .scalar(String.self)),
       ]
@@ -963,7 +963,7 @@ public final class GetLocationQuery: GraphQLQuery {
         self.snapshot = snapshot
       }
 
-      public init(id: GraphQLID, name: String, long: Int? = nil, lat: Int? = nil, modelName: String? = nil, imageName: String? = nil) {
+      public init(id: GraphQLID, name: String, long: Double? = nil, lat: Double? = nil, modelName: String? = nil, imageName: String? = nil) {
         self.init(snapshot: ["__typename": "Location", "id": id, "name": name, "long": long, "lat": lat, "modelName": modelName, "imageName": imageName])
       }
 
@@ -994,18 +994,18 @@ public final class GetLocationQuery: GraphQLQuery {
         }
       }
 
-      public var long: Int? {
+      public var long: Double? {
         get {
-          return snapshot["long"] as? Int
+          return snapshot["long"] as? Double
         }
         set {
           snapshot.updateValue(newValue, forKey: "long")
         }
       }
 
-      public var lat: Int? {
+      public var lat: Double? {
         get {
-          return snapshot["lat"] as? Int
+          return snapshot["lat"] as? Double
         }
         set {
           snapshot.updateValue(newValue, forKey: "lat")
@@ -1130,8 +1130,8 @@ public final class ListLocationsQuery: GraphQLQuery {
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
           GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
           GraphQLField("name", type: .nonNull(.scalar(String.self))),
-          GraphQLField("long", type: .scalar(Int.self)),
-          GraphQLField("lat", type: .scalar(Int.self)),
+          GraphQLField("long", type: .scalar(Double.self)),
+          GraphQLField("lat", type: .scalar(Double.self)),
           GraphQLField("modelName", type: .scalar(String.self)),
           GraphQLField("imageName", type: .scalar(String.self)),
         ]
@@ -1142,7 +1142,7 @@ public final class ListLocationsQuery: GraphQLQuery {
           self.snapshot = snapshot
         }
 
-        public init(id: GraphQLID, name: String, long: Int? = nil, lat: Int? = nil, modelName: String? = nil, imageName: String? = nil) {
+        public init(id: GraphQLID, name: String, long: Double? = nil, lat: Double? = nil, modelName: String? = nil, imageName: String? = nil) {
           self.init(snapshot: ["__typename": "Location", "id": id, "name": name, "long": long, "lat": lat, "modelName": modelName, "imageName": imageName])
         }
 
@@ -1173,18 +1173,18 @@ public final class ListLocationsQuery: GraphQLQuery {
           }
         }
 
-        public var long: Int? {
+        public var long: Double? {
           get {
-            return snapshot["long"] as? Int
+            return snapshot["long"] as? Double
           }
           set {
             snapshot.updateValue(newValue, forKey: "long")
           }
         }
 
-        public var lat: Int? {
+        public var lat: Double? {
           get {
-            return snapshot["lat"] as? Int
+            return snapshot["lat"] as? Double
           }
           set {
             snapshot.updateValue(newValue, forKey: "lat")
@@ -1253,8 +1253,8 @@ public final class OnCreateLocationSubscription: GraphQLSubscription {
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
         GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
         GraphQLField("name", type: .nonNull(.scalar(String.self))),
-        GraphQLField("long", type: .scalar(Int.self)),
-        GraphQLField("lat", type: .scalar(Int.self)),
+        GraphQLField("long", type: .scalar(Double.self)),
+        GraphQLField("lat", type: .scalar(Double.self)),
         GraphQLField("modelName", type: .scalar(String.self)),
         GraphQLField("imageName", type: .scalar(String.self)),
       ]
@@ -1265,7 +1265,7 @@ public final class OnCreateLocationSubscription: GraphQLSubscription {
         self.snapshot = snapshot
       }
 
-      public init(id: GraphQLID, name: String, long: Int? = nil, lat: Int? = nil, modelName: String? = nil, imageName: String? = nil) {
+      public init(id: GraphQLID, name: String, long: Double? = nil, lat: Double? = nil, modelName: String? = nil, imageName: String? = nil) {
         self.init(snapshot: ["__typename": "Location", "id": id, "name": name, "long": long, "lat": lat, "modelName": modelName, "imageName": imageName])
       }
 
@@ -1296,18 +1296,18 @@ public final class OnCreateLocationSubscription: GraphQLSubscription {
         }
       }
 
-      public var long: Int? {
+      public var long: Double? {
         get {
-          return snapshot["long"] as? Int
+          return snapshot["long"] as? Double
         }
         set {
           snapshot.updateValue(newValue, forKey: "long")
         }
       }
 
-      public var lat: Int? {
+      public var lat: Double? {
         get {
-          return snapshot["lat"] as? Int
+          return snapshot["lat"] as? Double
         }
         set {
           snapshot.updateValue(newValue, forKey: "lat")
@@ -1375,8 +1375,8 @@ public final class OnUpdateLocationSubscription: GraphQLSubscription {
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
         GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
         GraphQLField("name", type: .nonNull(.scalar(String.self))),
-        GraphQLField("long", type: .scalar(Int.self)),
-        GraphQLField("lat", type: .scalar(Int.self)),
+        GraphQLField("long", type: .scalar(Double.self)),
+        GraphQLField("lat", type: .scalar(Double.self)),
         GraphQLField("modelName", type: .scalar(String.self)),
         GraphQLField("imageName", type: .scalar(String.self)),
       ]
@@ -1387,7 +1387,7 @@ public final class OnUpdateLocationSubscription: GraphQLSubscription {
         self.snapshot = snapshot
       }
 
-      public init(id: GraphQLID, name: String, long: Int? = nil, lat: Int? = nil, modelName: String? = nil, imageName: String? = nil) {
+      public init(id: GraphQLID, name: String, long: Double? = nil, lat: Double? = nil, modelName: String? = nil, imageName: String? = nil) {
         self.init(snapshot: ["__typename": "Location", "id": id, "name": name, "long": long, "lat": lat, "modelName": modelName, "imageName": imageName])
       }
 
@@ -1418,18 +1418,18 @@ public final class OnUpdateLocationSubscription: GraphQLSubscription {
         }
       }
 
-      public var long: Int? {
+      public var long: Double? {
         get {
-          return snapshot["long"] as? Int
+          return snapshot["long"] as? Double
         }
         set {
           snapshot.updateValue(newValue, forKey: "long")
         }
       }
 
-      public var lat: Int? {
+      public var lat: Double? {
         get {
-          return snapshot["lat"] as? Int
+          return snapshot["lat"] as? Double
         }
         set {
           snapshot.updateValue(newValue, forKey: "lat")
@@ -1497,8 +1497,8 @@ public final class OnDeleteLocationSubscription: GraphQLSubscription {
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
         GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
         GraphQLField("name", type: .nonNull(.scalar(String.self))),
-        GraphQLField("long", type: .scalar(Int.self)),
-        GraphQLField("lat", type: .scalar(Int.self)),
+        GraphQLField("long", type: .scalar(Double.self)),
+        GraphQLField("lat", type: .scalar(Double.self)),
         GraphQLField("modelName", type: .scalar(String.self)),
         GraphQLField("imageName", type: .scalar(String.self)),
       ]
@@ -1509,7 +1509,7 @@ public final class OnDeleteLocationSubscription: GraphQLSubscription {
         self.snapshot = snapshot
       }
 
-      public init(id: GraphQLID, name: String, long: Int? = nil, lat: Int? = nil, modelName: String? = nil, imageName: String? = nil) {
+      public init(id: GraphQLID, name: String, long: Double? = nil, lat: Double? = nil, modelName: String? = nil, imageName: String? = nil) {
         self.init(snapshot: ["__typename": "Location", "id": id, "name": name, "long": long, "lat": lat, "modelName": modelName, "imageName": imageName])
       }
 
@@ -1540,18 +1540,18 @@ public final class OnDeleteLocationSubscription: GraphQLSubscription {
         }
       }
 
-      public var long: Int? {
+      public var long: Double? {
         get {
-          return snapshot["long"] as? Int
+          return snapshot["long"] as? Double
         }
         set {
           snapshot.updateValue(newValue, forKey: "long")
         }
       }
 
-      public var lat: Int? {
+      public var lat: Double? {
         get {
-          return snapshot["lat"] as? Int
+          return snapshot["lat"] as? Double
         }
         set {
           snapshot.updateValue(newValue, forKey: "lat")

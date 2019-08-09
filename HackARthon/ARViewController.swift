@@ -585,7 +585,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
     }
     
     func runMutation(){
-        let mutationInput = CreateLocationInput(id: "0", name: "iHeart", long: 23.9595, lat: -98.73474, modelName: "iHeart.dae", imageName: "iHeart.png")
+        let mutationInput = CreateLocationInput(id: "1", name: "iHeart", long: 23.9595, lat: -98.73474, modelName: "iHeart.dae", imageName: "iHeart.png")
         appSyncClient?.perform(mutation: CreateLocationMutation(input: mutationInput)) { (result, error) in
             if let error = error as? AWSAppSyncClientError {
                 print("Error occurred: \(error.localizedDescription )")
