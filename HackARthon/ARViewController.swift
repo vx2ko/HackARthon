@@ -39,6 +39,8 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
     
     var appSyncClient: AWSAppSyncClient?
     
+    var customGeofence = CustomGeofence()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -65,8 +67,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
         
         //Set lighting
         configureLighting()
-        runQuery()
-        
+        customGeofence.setupGeofence()
     }
     
     //Hide status bar
@@ -584,33 +585,5 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
         
     }
     
-//    func runMutation(){
-//        let mutationInput = CreateLocationInput(id: "2", name: "fuck you", long: 23.9595, lat: -98.73474, modelName: "iHeart.dae", imageName: "iHeart.png")
-//        appSyncClient?.perform(mutation: CreateLocationMutation(input: mutationInput)) { (result, error) in
-//            if let error = error as? AWSAppSyncClientError {
-//                print("Error occurred: \(error.localizedDescription )")
-//            }
-//            if let resultError = result?.errors {
-//                print("Error saving the item on server: \(resultError)")
-//                return
-//            }
-//            self.runQuery()
-//        }
-//    }
-    
-    func runQuery(){
-        appSyncClient?.fetch(query: ListLocationsQuery(), cachePolicy: .returnCacheDataAndFetch) {(result, error) in
-            if error != nil {
-                print(error?.localizedDescription ?? "")
-                return
-            }
-            result?.data?.listLocations?.items!.forEach {
-                let name = $0?.name
-                let lat = $0?.lat
-                let long = $0?.long
-                print("Name:\(name!) Latitude:\(lat!) Longitude:\(long!)")
-                
-            }
-        }
-    }
+
 }
