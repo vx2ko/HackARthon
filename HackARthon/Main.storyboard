@@ -489,6 +489,7 @@
         <image name="wbTN.png" width="24" height="22.799999237060547"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="H2f-3E-1nI"/>
         <segue reference="7TM-0h-cIq"/>
         <segue reference="XyJ-97-2oc"/>
     </inferredMetricsTieBreakers>
