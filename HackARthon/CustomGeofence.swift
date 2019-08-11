@@ -10,15 +10,19 @@ import Foundation
 import CoreLocation
 import AWSAppSync
 
-class CustomGeofence: CLCircularRegion {
+class CustomGeofence: CLLocationManager, CLLocationManagerDelegate {
     var appSyncClient: AWSAppSyncClient?
     var locationManager: CLLocationManager = CLLocationManager()
-
-    func setupGeofence(){
+    var closestCoordinates = [[CLLocationDegrees]]()
+    var modelURL: String!
+    var imageURL: String!
+    
+    func queryGeofenceData(){
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appSyncClient = appDelegate.appSyncClient
         
-        appSyncClient?.fetch(query: ListLocationsQuery(), cachePolicy: .returnCacheDataAndFetch) {(result, error) in
+        
+        appSyncClient?.fetch(query: ListLocationsQuery(), cachePolicy: .fetchIgnoringCacheData) {(result, error) in
             if error != nil {
                 print(error?.localizedDescription ?? "")
                 return
@@ -27,6 +31,7 @@ class CustomGeofence: CLCircularRegion {
                 let name = $0?.name
                 let lat = $0?.lat
                 let long = $0?.long
+
                 print("Name:\(name!) Latitude:\(lat!) Longitude:\(long!)")
                 
                 let coordinates = CLLocation(latitude: lat!, longitude: long!)
@@ -36,10 +41,25 @@ class CustomGeofence: CLCircularRegion {
                 let distance = userLocation?.distance(from: coordinates)
                 print("\(distance!) meters from \(name!)")
                 if distance! <= 500.00 {
+                    self.modelURL = $0?.modelName
+                    self.imageURL = $0?.imageName
                     print("You are within 500 meters of \(name!)")
+                    self.closestCoordinates.append([lat!, long!])
+                    print(self.closestCoordinates)
+                    self.setupGeofence(lat: lat!, long: long!, name: name!)
                 }
             }
         }
+    }
+    
+    func setupGeofence(lat: CLLocationDegrees, long: CLLocationDegrees, name: String){
+        let geofenceCenter = CLLocationCoordinate2D(latitude: lat, longitude: long)
+        let geofenceRegion = CLCircularRegion(center: geofenceCenter, radius: 20, identifier: name)
+        print(geofenceRegion.identifier)
+        locationManager.startMonitoring(for: geofenceRegion)
+        locationManager.startUpdatingLocation()
+        locationManager.requestState(for: geofenceRegion)
+        
     }
     
     //    func runMutation(){

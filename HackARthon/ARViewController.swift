@@ -67,7 +67,6 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
         
         //Set lighting
         configureLighting()
-        customGeofence.setupGeofence()
     }
     
     //Hide status bar
@@ -414,18 +413,24 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if (status == CLAuthorizationStatus.authorizedAlways) {
-            setUpGeofence()
-        
+            //setUpGeofence()
+            customGeofence.queryGeofenceData()
+
         }
     }
     
     func locationManager(_ manager: CLLocationManager, didStartMonitoringFor region: CLRegion) {
         print("Monitoring \(region.identifier)")
     }
-        
+    
     func locationManager(_ manager: CLLocationManager, didDetermineState state: CLRegionState, for region: CLRegion) {
+        //if region state is inside region, we want to load model
         
         if state == CLRegionState.inside{
+            print("You are in \(region.identifier) region")
+            print(customGeofence.imageURL)
+            print(customGeofence.modelURL)
+
             switch region.identifier {
             case "Work":
                 //infoLabel.text = "You are at work"
@@ -442,7 +447,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
             default:
                 return
             }
-        } 
+        }
 
     }
     
