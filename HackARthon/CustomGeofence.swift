@@ -12,41 +12,41 @@ import AWSAppSync
 
 class CustomGeofence: CLLocationManager, CLLocationManagerDelegate {
     var appSyncClient: AWSAppSyncClient?
-    var locationManager: CLLocationManager = CLLocationManager()
-    var closestCoordinates = [[CLLocationDegrees]]()
     var modelURL: String!
     var imageURL: String!
+    var name: String!
     
     func queryGeofenceData(){
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appSyncClient = appDelegate.appSyncClient
         
         
-        appSyncClient?.fetch(query: ListLocationsQuery(), cachePolicy: .fetchIgnoringCacheData) {(result, error) in
+        appSyncClient?.fetch(query: ListLocationsQuery(), cachePolicy: .returnCacheDataElseFetch) {(result, error) in
             if error != nil {
                 print(error?.localizedDescription ?? "")
                 return
             }
             result?.data?.listLocations?.items!.forEach {
-                let name = $0?.name
+                self.name = $0?.name
                 let lat = $0?.lat
                 let long = $0?.long
+                self.imageURL = $0?.imageName
+                self.modelURL = $0?.modelName
+                //self.nameArray.append([self.name!, self.imageURL!])
 
-                print("Name:\(name!) Latitude:\(lat!) Longitude:\(long!)")
+                print("Name:\(self.name!) Latitude:\(lat!) Longitude:\(long!)")
                 
                 let coordinates = CLLocation(latitude: lat!, longitude: long!)
 //                print(coordinates)
-                let userLocation = self.locationManager.location
+                let userLocation = ARViewController.shared.locationManager.location
 //                print(userLocation)
                 let distance = userLocation?.distance(from: coordinates)
-                print("\(distance!) meters from \(name!)")
-                if distance! <= 500.00 {
-                    self.modelURL = $0?.modelName
-                    self.imageURL = $0?.imageName
-                    print("You are within 500 meters of \(name!)")
-                    self.closestCoordinates.append([lat!, long!])
-                    print(self.closestCoordinates)
-                    self.setupGeofence(lat: lat!, long: long!, name: name!)
+                print("\(distance!) meters from \(self.name!)")
+                if distance! <= 1000.00 {
+                    print("You are within 1000 meters of \(self.name!)")
+                    //self.closestCoordinates.append([lat!, long!])
+                    //print(self.closestCoordinates)
+                    self.setupGeofence(lat: lat!, long: long!, name: self.name!)
                 }
             }
         }
@@ -56,39 +56,9 @@ class CustomGeofence: CLLocationManager, CLLocationManagerDelegate {
         let geofenceCenter = CLLocationCoordinate2D(latitude: lat, longitude: long)
         let geofenceRegion = CLCircularRegion(center: geofenceCenter, radius: 20, identifier: name)
         print(geofenceRegion.identifier)
-        locationManager.startMonitoring(for: geofenceRegion)
-        locationManager.startUpdatingLocation()
-        locationManager.requestState(for: geofenceRegion)
+        ARViewController.shared.locationManager.startMonitoring(for: geofenceRegion)
+        ARViewController.shared.locationManager.startUpdatingLocation()
+        ARViewController.shared.locationManager.requestState(for: geofenceRegion)
         
-    }
-    
-    //    func runMutation(){
-    //        let mutationInput = CreateLocationInput(id: "2", name: "fuck you", long: 23.9595, lat: -98.73474, modelName: "iHeart.dae", imageName: "iHeart.png")
-    //        appSyncClient?.perform(mutation: CreateLocationMutation(input: mutationInput)) { (result, error) in
-    //            if let error = error as? AWSAppSyncClientError {
-    //                print("Error occurred: \(error.localizedDescription )")
-    //            }
-    //            if let resultError = result?.errors {
-    //                print("Error saving the item on server: \(resultError)")
-    //                return
-    //            }
-    //            self.runQuery()
-    //        }
-    //    }
-    
-    func runQuery(){
-        appSyncClient?.fetch(query: ListLocationsQuery(), cachePolicy: .returnCacheDataAndFetch) {(result, error) in
-            if error != nil {
-                print(error?.localizedDescription ?? "")
-                return
-            }
-            result?.data?.listLocations?.items!.forEach {
-                let name = $0?.name
-                let lat = $0?.lat
-                let long = $0?.long
-                print("Name:\(name!) Latitude:\(lat!) Longitude:\(long!)")
-                
-            }
-        }
     }
 }

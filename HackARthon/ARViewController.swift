@@ -23,7 +23,16 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
     var itemsCDArray = [NSManagedObject]()
     var objPlayer: AVAudioPlayer?
     var parentName: String?
-    var locationManager: CLLocationManager = CLLocationManager()
+//    var locationManager: CLLocationManager = CLLocationManager()
+    public let locationManager: CLLocationManager = {
+        $0.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+        $0.distanceFilter = 5
+        $0.requestWhenInUseAuthorization()
+        
+        return $0
+    }(CLLocationManager())
+    static let shared = ARViewController()
+
     let iHeartGeoFenceCenter = CLLocationCoordinate2DMake(29.647751, -98.453967)
     let homeGeoFenceCenter = CLLocationCoordinate2DMake(29.529139, -98.404270)
     
@@ -54,9 +63,9 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
         
         //Enable feature points
         locationManager.delegate = self
-        locationManager.requestAlwaysAuthorization()
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.distanceFilter = 5
+//        locationManager.requestAlwaysAuthorization()
+//        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+//        locationManager.distanceFilter = 5
         
         UIApplication.shared.isIdleTimerDisabled = true
         
@@ -357,13 +366,28 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
             if let node = tappedNode.first?.node as SCNNode? {
                 playAudioFile()
                 addAnimation(node: node)
-                itemLabel.isHidden = false
-                itemLabel.text = ("You got \(parentName!)")
+                print(parentName!)
+//                itemLabel.isHidden = false
+//                itemLabel.text = ("You got \(parentName!)")
 
                 //itemTableViewController.itemArray.append(parentName!)
                 //arVCItemArray.append(parentName!)
                 
                 //arCellImageArray.append(UIImage(named: "art.scnassets/emoji.png")!)
+                
+                appSyncClient?.fetch(query: ListLocationsQuery(), cachePolicy: .fetchIgnoringCacheData) {(result, error) in
+                    if error != nil {
+                        print(error?.localizedDescription ?? "")
+                        return
+                    }
+                    result?.data?.listLocations?.items!.forEach {
+                        let name = $0?.name
+                        let imageURL = $0?.imageName
+                        if name == parentName{
+                            self.save(name: name!, imageName: imageURL!, modelName: parentName!)
+                        }
+                    }
+                }
                 
                 switch (parentName) {
                 case "Rolling Stones":
@@ -388,28 +412,28 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
         }
     }
     
-    func setUpGeofence() {
-        let homeGeoFenceCenter = CLLocationCoordinate2DMake(29.529139, -98.404270)
-        let homeGeofenceRegion = CLCircularRegion(center: homeGeoFenceCenter, radius: 30, identifier: "Home")
-        let workGeoFenceCenter = CLLocationCoordinate2DMake(29.647667, -98.453903)
-        let workGeofenceRegion = CLCircularRegion(center: workGeoFenceCenter, radius: 30, identifier: "Work")
-        let whataburgerGeoFenceCenter = CLLocationCoordinate2DMake(29.636807, -98.454548)
-        let whataburgerGeofenceRegion = CLCircularRegion(center: whataburgerGeoFenceCenter, radius: 30, identifier: "Whataburger")
-        let newGeoFenceCenter = CLLocationCoordinate2DMake(29.615043, -98.546712)
-        let newGeofenceRegion = CLCircularRegion(center: newGeoFenceCenter, radius: 30, identifier: "Random Location")
-
-        locationManager.startMonitoring(for: homeGeofenceRegion)
-        locationManager.startMonitoring(for: workGeofenceRegion)
-        locationManager.startMonitoring(for: whataburgerGeofenceRegion)
-        locationManager.startMonitoring(for: newGeofenceRegion)
-        locationManager.startUpdatingLocation()
-        locationManager.requestState(for: homeGeofenceRegion)
-        locationManager.requestState(for: workGeofenceRegion)
-        locationManager.requestState(for: whataburgerGeofenceRegion)
-        locationManager.requestState(for: newGeofenceRegion)
-
-        print("Geofence Setup")
-    }
+//    func setUpGeofence() {
+//        let homeGeoFenceCenter = CLLocationCoordinate2DMake(29.529139, -98.404270)
+//        let homeGeofenceRegion = CLCircularRegion(center: homeGeoFenceCenter, radius: 30, identifier: "Home")
+//        let workGeoFenceCenter = CLLocationCoordinate2DMake(29.647667, -98.453903)
+//        let workGeofenceRegion = CLCircularRegion(center: workGeoFenceCenter, radius: 30, identifier: "Work")
+//        let whataburgerGeoFenceCenter = CLLocationCoordinate2DMake(29.636807, -98.454548)
+//        let whataburgerGeofenceRegion = CLCircularRegion(center: whataburgerGeoFenceCenter, radius: 30, identifier: "Whataburger")
+//        let newGeoFenceCenter = CLLocationCoordinate2DMake(29.615043, -98.546712)
+//        let newGeofenceRegion = CLCircularRegion(center: newGeoFenceCenter, radius: 30, identifier: "Random Location")
+//
+//        locationManager.startMonitoring(for: homeGeofenceRegion)
+//        locationManager.startMonitoring(for: workGeofenceRegion)
+//        locationManager.startMonitoring(for: whataburgerGeofenceRegion)
+//        locationManager.startMonitoring(for: newGeofenceRegion)
+//        locationManager.startUpdatingLocation()
+//        locationManager.requestState(for: homeGeofenceRegion)
+//        locationManager.requestState(for: workGeofenceRegion)
+//        locationManager.requestState(for: whataburgerGeofenceRegion)
+//        locationManager.requestState(for: newGeofenceRegion)
+//
+//        print("Geofence Setup")
+//    }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if (status == CLAuthorizationStatus.authorizedAlways) {
@@ -425,34 +449,66 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
     
     func locationManager(_ manager: CLLocationManager, didDetermineState state: CLRegionState, for region: CLRegion) {
         //if region state is inside region, we want to load model
-        
         if state == CLRegionState.inside{
-            print("You are in \(region.identifier) region")
-            print(customGeofence.imageURL)
-            print(customGeofence.modelURL)
-
-            switch region.identifier {
-            case "Work":
-                //infoLabel.text = "You are at work"
-                print("regionState is Work")
-                addiHeartWingModel()
-            case "Home":
-                //infoLabel.text = "You are home"
-                print("regionState is home")
-                addHomeModel()
-            case "Whataburger":
-                //infoLabel.text = "You are at Whataburger"
-                print("regionState is Whataburger")
-                addWhataburgerModel()
-            default:
-                return
+            //var modelURL: NSURL!
+            
+            appSyncClient?.fetch(query: ListLocationsQuery(), cachePolicy: .returnCacheDataElseFetch) {(result, error) in
+                if error != nil {
+                    print(error?.localizedDescription ?? "")
+                    return
+                }
+                result?.data?.listLocations?.items!.forEach {
+                    let name = $0?.name
+                    if name == region.identifier{
+                        let modelURLString = $0?.modelName
+                        print(modelURLString!)
+                        let modelURL = NSURL(string: modelURLString!)
+                        let modelSceneObject = try! SCNScene(url: modelURL! as URL, options: nil)
+                        let modelNode = SCNNode()
+                        
+                        for modelChild in modelSceneObject.rootNode.childNodes {
+                            modelNode.childNode(withName: name!, recursively: true)
+                            modelNode.addChildNode(modelChild)
+                        }
+                        let xPos = self.randomPosition(lowerBound: -1.5, upperBound: 1.5)
+                        //        let yPos = randomPosition(lowerBound: -1.5, upperBound: 1.5)
+                        let zPos = self.randomPosition(lowerBound: -1.5, upperBound: 1.5)
+                        
+                        let position = SCNVector3Make(xPos, -2.5, zPos)
+                        
+                        modelNode.position = position
+                        modelNode.name = name!
+                        print(name!)
+                        self.sceneView.scene.rootNode.addChildNode(modelNode)
+                    }
+                }
             }
+            //print(imageURL)
+            print("You are in \(region.identifier) region")
+
+//            switch region.identifier {
+//            case "Work":
+//                //infoLabel.text = "You are at work"
+//                print("regionState is Work")
+//                addiHeartWingModel()
+//            case "Home":
+//                //infoLabel.text = "You are home"
+//                print("regionState is home")
+//                addHomeModel()
+//            case "Whataburger":
+//                //infoLabel.text = "You are at Whataburger"
+//                print("regionState is Whataburger")
+//                addWhataburgerModel()
+//            default:
+//                return
+//            }
         }
 
     }
     
     //Called if device enters geofence
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
+
         switch region.identifier {
         case "Work":
             //infoLabel.text = "You are at work"
@@ -589,6 +645,9 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
         videoPlayer.volume = 0
         
     }
-    
+
+    func randomPosition(lowerBound lower:Float, upperBound upper:Float) -> Float {
+        return Float(arc4random()) / Float(UInt32.max) * (lower - upper) + upper
+    }
 
 }

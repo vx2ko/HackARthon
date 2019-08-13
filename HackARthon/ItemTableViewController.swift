@@ -62,11 +62,15 @@ class ItemTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let item = arViewVC.itemsCDArray[indexPath.row]
-        let imageName = item.value(forKeyPath: "imageName") as? String
-        let imageNameString: String! = imageName
-        print(imageNameString)
+        let imageURLString = item.value(forKeyPath: "imageName") as? String
+        print(imageURLString)
+        let imageURL = URL(string: imageURLString!)
+        let imageData = try? Data(contentsOf: imageURL!)
+        
+        let image = imageData
+        let itemImage = UIImage(data: image!)
         let itemCell = tableView.dequeueReusableCell(withIdentifier: "itemCell", for: indexPath)
-        itemCell.imageView?.image = UIImage(named: imageNameString)
+        itemCell.imageView?.image = itemImage
         //itemCell.imageView?.image = itemImageArray[indexPath.item]
         itemCell.textLabel?.text = item.value(forKeyPath: "name") as? String
         //itemCell.textLabel?.text = itemVCArray[indexPath.item]
@@ -78,7 +82,7 @@ class ItemTableViewController: UITableViewController {
         let item = arViewVC.itemsCDArray[indexPath.row]
         modelName = item.value(forKeyPath: "modelName") as? String
         itemARVC.itemName = modelName
-        //print(itemARVC.itemName)
+        print(itemARVC.itemName)
         
         
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)

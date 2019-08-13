@@ -30,6 +30,7 @@
 		898526B822F41E82007CFE4A /* ContestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898526B722F41E82007CFE4A /* ContestViewController.swift */; };
 		898526BA22F74AFD007CFE4A /* CustomMapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898526B922F74AFD007CFE4A /* CustomMapAnnotation.swift */; };
 		89ABE92C22FF086800F0B0DD /* CustomGeofence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ABE92B22FF086800F0B0DD /* CustomGeofence.swift */; };
+		89ABE9302302423600F0B0DD /* LocationServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ABE92F2302423600F0B0DD /* LocationServices.swift */; };
 		89AFBACA22EA959500772B1D /* ItemTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89AFBAC922EA959500772B1D /* ItemTableViewController.swift */; };
 		89AFBACD22EF589E00772B1D /* HackARthon.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 89AFBACB22EF589E00772B1D /* HackARthon.xcdatamodeld */; };
 		89AFBAD522F1D46700772B1D /* ItemARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89AFBAD422F1D46700772B1D /* ItemARViewController.swift */; };
@@ -85,6 +86,7 @@
 		898526B722F41E82007CFE4A /* ContestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContestViewController.swift; sourceTree = "<group>"; };
 		898526B922F74AFD007CFE4A /* CustomMapAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMapAnnotation.swift; sourceTree = "<group>"; };
 		89ABE92B22FF086800F0B0DD /* CustomGeofence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomGeofence.swift; sourceTree = "<group>"; };
+		89ABE92F2302423600F0B0DD /* LocationServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationServices.swift; sourceTree = "<group>"; };
 		89AFBAC922EA959500772B1D /* ItemTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTableViewController.swift; sourceTree = "<group>"; };
 		89AFBACC22EF589E00772B1D /* HackARthon.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HackARthon.xcdatamodel; sourceTree = "<group>"; };
 		89AFBAD422F1D46700772B1D /* ItemARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemARViewController.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 				897B8C9C22E9F108003B6969 /* Assets.xcassets */,
 				897B8C9B22E9F108003B6969 /* art.scnassets */,
 				895138C422EA0C130028BB9C /* AppDelegate.swift */,
+				89ABE92F2302423600F0B0DD /* LocationServices.swift */,
 				897B8C9D22E9F108003B6969 /* ARViewController.swift */,
 				89ABE92B22FF086800F0B0DD /* CustomGeofence.swift */,
 				897B8C9A22E9F108003B6969 /* MapViewController.swift */,
@@ -457,6 +460,7 @@
 				898526B822F41E82007CFE4A /* ContestViewController.swift in Sources */,
 				897B8CA922E9F109003B6969 /* WhataburgerModel.swift in Sources */,
 				89AFBACA22EA959500772B1D /* ItemTableViewController.swift in Sources */,
+				89ABE9302302423600F0B0DD /* LocationServices.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

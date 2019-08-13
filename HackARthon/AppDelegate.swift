@@ -14,8 +14,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    var items = [NSManagedObject]()
-    
     var appSyncClient: AWSAppSyncClient?
     
     lazy var persistentContainer: NSPersistentContainer = {
@@ -47,6 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } catch {
             print("Error initializing appsync client. \(error)")
         }
+        
         
         return true
     }
