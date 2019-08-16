@@ -10,43 +10,39 @@ import Foundation
 import CoreLocation
 import AWSAppSync
 
-class CustomGeofence: CLLocationManager, CLLocationManagerDelegate {
-    var appSyncClient: AWSAppSyncClient?
+class CustomGeofence: NSObject {
     var modelURL: String!
     var imageURL: String!
-    var name: String!
+    var lat = Double()
+    var long = Double()
+    var geofenceRegion = CLCircularRegion()
     
     func queryGeofenceData(){
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appSyncClient = appDelegate.appSyncClient
-        
-        
-        appSyncClient?.fetch(query: ListLocationsQuery(), cachePolicy: .returnCacheDataElseFetch) {(result, error) in
+        DataService.shared.appSyncClient?.fetch(query: ListLocationsQuery(), cachePolicy: .returnCacheDataElseFetch) {(result, error) in
             if error != nil {
                 print(error?.localizedDescription ?? "")
                 return
             }
+            
+            let userLocation = LocationService.shared.manager.location
+
             result?.data?.listLocations?.items!.forEach {
-                self.name = $0?.name
+                let name = $0?.name
                 let lat = $0?.lat
                 let long = $0?.long
-                self.imageURL = $0?.imageName
-                self.modelURL = $0?.modelName
                 //self.nameArray.append([self.name!, self.imageURL!])
 
-                print("Name:\(self.name!) Latitude:\(lat!) Longitude:\(long!)")
+                print("Name:\(name!) Latitude:\(lat!) Longitude:\(long!)")
                 
                 let coordinates = CLLocation(latitude: lat!, longitude: long!)
-//                print(coordinates)
-                let userLocation = ARViewController.shared.locationManager.location
-//                print(userLocation)
+                print(coordinates)
                 let distance = userLocation?.distance(from: coordinates)
-                print("\(distance!) meters from \(self.name!)")
+                print("\(distance!) meters from \(name!)")
                 if distance! <= 1000.00 {
-                    print("You are within 1000 meters of \(self.name!)")
+                    print("You are within 1000 meters of \(name!)")
                     //self.closestCoordinates.append([lat!, long!])
                     //print(self.closestCoordinates)
-                    self.setupGeofence(lat: lat!, long: long!, name: self.name!)
+                    self.setupGeofence(lat: lat!, long: long!, name: name!)
                 }
             }
         }
@@ -54,11 +50,17 @@ class CustomGeofence: CLLocationManager, CLLocationManagerDelegate {
     
     func setupGeofence(lat: CLLocationDegrees, long: CLLocationDegrees, name: String){
         let geofenceCenter = CLLocationCoordinate2D(latitude: lat, longitude: long)
-        let geofenceRegion = CLCircularRegion(center: geofenceCenter, radius: 20, identifier: name)
+        geofenceRegion = CLCircularRegion(center: geofenceCenter, radius: 20, identifier: name)
         print(geofenceRegion.identifier)
-        ARViewController.shared.locationManager.startMonitoring(for: geofenceRegion)
-        ARViewController.shared.locationManager.startUpdatingLocation()
-        ARViewController.shared.locationManager.requestState(for: geofenceRegion)
-        
+
+        //if !ARViewController.shared.locationManager.monitoredRegions.contains(geofenceRegion){
+            LocationService.shared.manager.startMonitoring(for: geofenceRegion)
+            LocationService.shared.manager.startUpdatingLocation()
+        //}
+        LocationService.shared.manager.requestState(for: geofenceRegion)
+
+
+        //print(ARViewController.shared.locationManager.monitoredRegions)
+
     }
 }

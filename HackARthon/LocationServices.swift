@@ -8,28 +8,25 @@
 
 import Foundation
 import CoreLocation
+import AWSAppSync
+import ARKit
+
 
 class LocationService: NSObject, CLLocationManagerDelegate {
     // Swifty way of creating a singleton
     static let shared = LocationService()
     
     // set the manager object right when it gets initialized
-    public let manager: CLLocationManager = {
-        $0.desiredAccuracy = kCLLocationAccuracyBestForNavigation
-        $0.distanceFilter = 5
-        $0.requestWhenInUseAuthorization()
-        
-        return $0
-    }(CLLocationManager())
     
-    private(set) var currentLocation: CLLocationCoordinate2D!
-    private(set) var currentHeading: CLHeading!
+    var manager: CLLocationManager = CLLocationManager()
+
     
     private override init() {
         super.init()
-        
         // delegate MUST be set while initialization
-        manager.delegate = self
+        //manager.delegate = self
+        manager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+        manager.distanceFilter = 5
     }
     
     // MARK: Control Mechanisms
@@ -53,17 +50,13 @@ class LocationService: NSObject, CLLocationManagerDelegate {
         manager.location?.distance(from: location)
     }
     
-    func getCurrentLocation(){
-        manager.location
-    }
-    
     // MARK: Location Updates
     func locationManager(_ manager: CLLocationManager,
                          didUpdateLocations locations: [CLLocation])
     {
         // If location data can be determined
         if let location = locations.last {
-            currentLocation = location.coordinate
+            //currentLocation = location.coordinate
         }
     }
     
@@ -77,19 +70,10 @@ class LocationService: NSObject, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager,
                          didUpdateHeading newHeading: CLHeading)
     {
-        currentHeading = newHeading
+        //currentHeading = newHeading
     }
     
     func locationManagerShouldDisplayHeadingCalibration(_ manager: CLLocationManager) -> Bool {
         return true
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        if (status == CLAuthorizationStatus.authorizedAlways) {
-            //setUpGeofence()
-            //customGeofence.queryGeofenceData()
-            
-        }
-
     }
 }

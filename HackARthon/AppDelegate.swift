@@ -46,7 +46,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("Error initializing appsync client. \(error)")
         }
         
-        
         return true
     }
     

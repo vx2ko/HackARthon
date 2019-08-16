@@ -189,7 +189,7 @@
                     </view>
                     <connections>
                         <outlet property="itemLabel" destination="Hpx-g3-Jn9" id="NbM-fv-bFb"/>
-                        <outlet property="sceneView" destination="BrB-h1-WRS" id="1Qp-Kv-zIZ"/>
+                        <outlet property="sceneView" destination="BrB-h1-WRS" id="9Ej-da-Fx0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>

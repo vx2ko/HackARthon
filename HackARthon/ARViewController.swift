@@ -6,16 +6,14 @@
 import UIKit
 import SceneKit
 import ARKit
-import CoreLocation
 import CoreData
+import CoreLocation
 import AVFoundation
 import AWSAppSync
 
 class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, CLLocationManagerDelegate {
     
     @IBOutlet var sceneView: ARSCNView!
-    //@IBOutlet weak var infoLabel: UILabel!
-    //@IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var itemLabel: UILabel!
     
     var arVCItemArray = [String]()
@@ -23,18 +21,6 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
     var itemsCDArray = [NSManagedObject]()
     var objPlayer: AVAudioPlayer?
     var parentName: String?
-//    var locationManager: CLLocationManager = CLLocationManager()
-    public let locationManager: CLLocationManager = {
-        $0.desiredAccuracy = kCLLocationAccuracyBestForNavigation
-        $0.distanceFilter = 5
-        $0.requestWhenInUseAuthorization()
-        
-        return $0
-    }(CLLocationManager())
-    static let shared = ARViewController()
-
-    let iHeartGeoFenceCenter = CLLocationCoordinate2DMake(29.647751, -98.453967)
-    let homeGeoFenceCenter = CLLocationCoordinate2DMake(29.529139, -98.404270)
     
     let logoRefImageName = ["iheartlogo1","iheartlogo2","iheartlogo3","iheartlogo4","iheartlogo5"]
     let hackathonRefImageName = ["hackathonlogo2", "hackathonlogo"]
@@ -46,23 +32,24 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
     var whataburgerModel = WhataburgerModel()
     var homeModel = HomeModel()
     
-    var appSyncClient: AWSAppSyncClient?
-    
     var customGeofence = CustomGeofence()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appSyncClient = appDelegate.appSyncClient
+        
         
         // Set the view's delegate
         sceneView.delegate = self
-        
+
+        LocationService.shared.manager.delegate = self
+        LocationService.shared.manager.requestAlwaysAuthorization()
+
         // Show statistics such as fps and timing information
         sceneView.showsStatistics = false
         
         //Enable feature points
-        locationManager.delegate = self
+//        locationManager.delegate = self
+
 //        locationManager.requestAlwaysAuthorization()
 //        locationManager.desiredAccuracy = kCLLocationAccuracyBest
 //        locationManager.distanceFilter = 5
@@ -76,6 +63,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
         
         //Set lighting
         configureLighting()
+
     }
     
     //Hide status bar
@@ -114,7 +102,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
         super.viewWillDisappear(animated)
         
         // Pause the view's session
-        sceneView.session.pause()
+        //sceneView.session.pause()
     }
     
     func session(_ session: ARSession, didFailWithError error: Error) {
@@ -375,7 +363,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
                 
                 //arCellImageArray.append(UIImage(named: "art.scnassets/emoji.png")!)
                 
-                appSyncClient?.fetch(query: ListLocationsQuery(), cachePolicy: .fetchIgnoringCacheData) {(result, error) in
+                DataService.shared.appSyncClient?.fetch(query: ListLocationsQuery(), cachePolicy: .fetchIgnoringCacheData) {(result, error) in
                     if error != nil {
                         print(error?.localizedDescription ?? "")
                         return
@@ -410,160 +398,6 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
             }
 
         }
-    }
-    
-//    func setUpGeofence() {
-//        let homeGeoFenceCenter = CLLocationCoordinate2DMake(29.529139, -98.404270)
-//        let homeGeofenceRegion = CLCircularRegion(center: homeGeoFenceCenter, radius: 30, identifier: "Home")
-//        let workGeoFenceCenter = CLLocationCoordinate2DMake(29.647667, -98.453903)
-//        let workGeofenceRegion = CLCircularRegion(center: workGeoFenceCenter, radius: 30, identifier: "Work")
-//        let whataburgerGeoFenceCenter = CLLocationCoordinate2DMake(29.636807, -98.454548)
-//        let whataburgerGeofenceRegion = CLCircularRegion(center: whataburgerGeoFenceCenter, radius: 30, identifier: "Whataburger")
-//        let newGeoFenceCenter = CLLocationCoordinate2DMake(29.615043, -98.546712)
-//        let newGeofenceRegion = CLCircularRegion(center: newGeoFenceCenter, radius: 30, identifier: "Random Location")
-//
-//        locationManager.startMonitoring(for: homeGeofenceRegion)
-//        locationManager.startMonitoring(for: workGeofenceRegion)
-//        locationManager.startMonitoring(for: whataburgerGeofenceRegion)
-//        locationManager.startMonitoring(for: newGeofenceRegion)
-//        locationManager.startUpdatingLocation()
-//        locationManager.requestState(for: homeGeofenceRegion)
-//        locationManager.requestState(for: workGeofenceRegion)
-//        locationManager.requestState(for: whataburgerGeofenceRegion)
-//        locationManager.requestState(for: newGeofenceRegion)
-//
-//        print("Geofence Setup")
-//    }
-    
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        if (status == CLAuthorizationStatus.authorizedAlways) {
-            //setUpGeofence()
-            customGeofence.queryGeofenceData()
-
-        }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didStartMonitoringFor region: CLRegion) {
-        print("Monitoring \(region.identifier)")
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didDetermineState state: CLRegionState, for region: CLRegion) {
-        //if region state is inside region, we want to load model
-        if state == CLRegionState.inside{
-            //var modelURL: NSURL!
-            
-            appSyncClient?.fetch(query: ListLocationsQuery(), cachePolicy: .returnCacheDataElseFetch) {(result, error) in
-                if error != nil {
-                    print(error?.localizedDescription ?? "")
-                    return
-                }
-                result?.data?.listLocations?.items!.forEach {
-                    let name = $0?.name
-                    if name == region.identifier{
-                        let modelURLString = $0?.modelName
-                        print(modelURLString!)
-                        let modelURL = NSURL(string: modelURLString!)
-                        let modelSceneObject = try! SCNScene(url: modelURL! as URL, options: nil)
-                        let modelNode = SCNNode()
-                        
-                        for modelChild in modelSceneObject.rootNode.childNodes {
-                            modelNode.childNode(withName: name!, recursively: true)
-                            modelNode.addChildNode(modelChild)
-                        }
-                        let xPos = self.randomPosition(lowerBound: -1.5, upperBound: 1.5)
-                        //        let yPos = randomPosition(lowerBound: -1.5, upperBound: 1.5)
-                        let zPos = self.randomPosition(lowerBound: -1.5, upperBound: 1.5)
-                        
-                        let position = SCNVector3Make(xPos, -2.5, zPos)
-                        
-                        modelNode.position = position
-                        modelNode.name = name!
-                        print(name!)
-                        self.sceneView.scene.rootNode.addChildNode(modelNode)
-                    }
-                }
-            }
-            //print(imageURL)
-            print("You are in \(region.identifier) region")
-
-//            switch region.identifier {
-//            case "Work":
-//                //infoLabel.text = "You are at work"
-//                print("regionState is Work")
-//                addiHeartWingModel()
-//            case "Home":
-//                //infoLabel.text = "You are home"
-//                print("regionState is home")
-//                addHomeModel()
-//            case "Whataburger":
-//                //infoLabel.text = "You are at Whataburger"
-//                print("regionState is Whataburger")
-//                addWhataburgerModel()
-//            default:
-//                return
-//            }
-        }
-
-    }
-    
-    //Called if device enters geofence
-    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
-
-        switch region.identifier {
-        case "Work":
-            //infoLabel.text = "You are at work"
-            print("regionState is Work")
-            addiHeartModel()
-        case "Home":
-            //infoLabel.text = "You are home"
-            print("regionState is home")
-            addHomeModel()
-        case "Whataburger":
-            //infoLabel.text = "You are at Whataburger"
-            print("regionState is Whataburger")
-            addWhataburgerModel()
-        case "Random Location":
-            //infoLabel.text = "You are somewhere mysterious"
-            addWhataburgerModel()
-        default:
-            return
-        }
-    }
-    
-    //Called if device leaves geofence
-    func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
-        switch region.identifier {
-        case "Work":
-            //infoLabel.text = "You are leaving work"
-            removeiHeartModel()
-        case "Home":
-            //infoLabel.text = "You are leaving home"
-            removeHomeModel()
-        case "Whataburger":
-            //infoLabel.text = "You are leaving Whataburger"
-            removeWhataburgerModel()
-        case "Random Location":
-            //infoLabel.text = "You are leaving the mysterious place"
-            removeWhataburgerModel()
-        default:
-            return
-        }
-    }
-    
-    //Called when location is updated
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let locValue:CLLocationCoordinate2D = manager.location!.coordinate
-        let geofenceRegion = CLCircularRegion(center: homeGeoFenceCenter, radius: 20, identifier: "Home")
-
-        //infoLabel.text = "locations = \(locValue.latitude) \(locValue.longitude)"
-        print("locations = \(locValue.latitude) \(locValue.longitude)")
-
-        let home = CLLocation(latitude: 29.647667, longitude: -98.453903)
-        let location = manager.location
-        let distance = location?.distance(from: home)
-        //distanceLabel.text = "\(distance!)"
-        print("\(distance!)")
-        
     }
     
     func save(name: String, imageName: String, modelName: String) {
@@ -649,5 +483,64 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
     func randomPosition(lowerBound lower:Float, upperBound upper:Float) -> Float {
         return Float(arc4random()) / Float(UInt32.max) * (lower - upper) + upper
     }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if (status == CLAuthorizationStatus.authorizedAlways) {
+            customGeofence.queryGeofenceData()
+            
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didStartMonitoringFor region: CLRegion) {
+        print("Monitoring \(region.identifier)")
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didDetermineState state: CLRegionState, for region: CLRegion) {
+        if state == CLRegionState.inside{
+            //var modelURL: NSURL!
+            print(region.identifier)
+            setupModel(region)
+            
+        }
+    }
+    
+    func setupModel(_ region: CLRegion){
+        let modelNode = SCNNode()
 
+        DataService.shared.appSyncClient?.fetch(query: ListLocationsQuery(), cachePolicy: .fetchIgnoringCacheData) {(result, error) in
+            if error != nil {
+                print(error?.localizedDescription ?? "")
+                return
+            }
+            
+            print("stop 1")
+            
+            result?.data?.listLocations?.items!.forEach {
+                let name = $0?.name
+                if name == region.identifier{
+                    print("Stop 2")
+                    let modelURLString = $0?.modelName
+                    print(modelURLString!)
+                    let modelURL = NSURL(string: modelURLString!)
+                    let modelSceneObject = try! SCNScene(url: modelURL! as URL, options: nil)
+
+                    for modelChild in modelSceneObject.rootNode.childNodes {
+                        modelNode.childNode(withName: name!, recursively: true)
+                        modelNode.addChildNode(modelChild)
+                    }
+                    let xPos = self.randomPosition(lowerBound: -1.5, upperBound: 1.5)
+                    //        let yPos = randomPosition(lowerBound: -1.5, upperBound: 1.5)
+                    let zPos = self.randomPosition(lowerBound: -1.5, upperBound: 1.5)
+                    
+                    let position = SCNVector3Make(xPos, -2.5, zPos)
+                    
+                    modelNode.position = position
+                    modelNode.name = name!
+                    print(name!)
+                    print(modelNode)
+                    self.sceneView.scene.rootNode.addChildNode(modelNode)
+                }
+            }
+        }
+    }
 }
