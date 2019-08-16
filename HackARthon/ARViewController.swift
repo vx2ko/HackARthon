@@ -290,8 +290,8 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
                 playAudioFile()
                 addAnimation(node: node)
                 print(parentName!)
-//                itemLabel.isHidden = false
-//                itemLabel.text = ("You got \(parentName!)")
+                itemLabel.isHidden = false
+                itemLabel.text = ("You got \(parentName!)")
                 
                 DataService.shared.appSyncClient?.fetch(query: ListLocationsQuery(), cachePolicy: .fetchIgnoringCacheData) {(result, error) in
                     if error != nil {
