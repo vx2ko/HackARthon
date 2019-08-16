@@ -7,6 +7,7 @@ query GetLocation($id: ID!) {
     lat
     modelName
     imageName
+    mapImageName
   }
 }
 query ListLocations(
@@ -22,6 +23,7 @@ query ListLocations(
       lat
       modelName
       imageName
+      mapImageName
     }
     nextToken
   }

@@ -28,15 +28,10 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
     let cerealRefImageName = "honeyNutCherrios"
     let ffCerealRefImage = "FrostedFlakes"
     
-    var iHeartLogo = IHeartModel()
-    var whataburgerModel = WhataburgerModel()
-    var homeModel = HomeModel()
-    
     var customGeofence = CustomGeofence()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         // Set the view's delegate
         sceneView.delegate = self
@@ -46,13 +41,6 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
 
         // Show statistics such as fps and timing information
         sceneView.showsStatistics = false
-        
-        //Enable feature points
-//        locationManager.delegate = self
-
-//        locationManager.requestAlwaysAuthorization()
-//        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-//        locationManager.distanceFilter = 5
         
         UIApplication.shared.isIdleTimerDisabled = true
         
@@ -283,59 +271,6 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
         }
     }
     
-    func removeiHeartModel(){
-        
-        let model = IHeartModel()
-        model.removeFromParentNode()
-        
-    }
-    
-    func removeHomeModel(){
-        let model = HomeModel()
-        model.removeFromParentNode()
-    }
-    
-    func removeWhataburgerModel(){
-        let model = WhataburgerModel()
-        model.removeFromParentNode()
-    }
-    
-    func addiHeartModel(){
-        let model = IHeartModel()
-        model.loadLogo()
-        sceneView.scene.rootNode.addChildNode(model)
-    }
-    
-    func addHomeModel(){
-        let model = HomeModel()
-        model.loadLogo()
-        sceneView.scene.rootNode.addChildNode(model)
-    }
-    
-    func addWhataburgerModel(){
-        let model = WhataburgerModel()
-        model.loadLogo()
-        sceneView.scene.rootNode.addChildNode(model)
-    }
-    
-    func addRollingStonesModel(){
-        let model = RollingStoneModel()
-        model.loadLogo()
-        sceneView.scene.rootNode.addChildNode(model)
-    }
-    
-    func addKJ97Model(){
-        let model = KJ97Model()
-        model.loadLogo()
-        sceneView.scene.rootNode.addChildNode(model)
-    }
-    
-    func addiHeartWingModel(){
-        let model = IheartWingModel()
-        model.loadLogo()
-        sceneView.scene.rootNode.addChildNode(model)
-    }
-    
     //TapGesture handler
     @objc func handleTap(_ gesture: UITapGestureRecognizer) {
         let results = self.sceneView.hitTest(gesture.location(in: gesture.view), types: ARHitTestResult.ResultType.featurePoint)
@@ -357,11 +292,6 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
                 print(parentName!)
 //                itemLabel.isHidden = false
 //                itemLabel.text = ("You got \(parentName!)")
-
-                //itemTableViewController.itemArray.append(parentName!)
-                //arVCItemArray.append(parentName!)
-                
-                //arCellImageArray.append(UIImage(named: "art.scnassets/emoji.png")!)
                 
                 DataService.shared.appSyncClient?.fetch(query: ListLocationsQuery(), cachePolicy: .fetchIgnoringCacheData) {(result, error) in
                     if error != nil {
@@ -376,27 +306,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
                         }
                     }
                 }
-                
-                switch (parentName) {
-                case "Rolling Stones":
-                    let imageName: String! = "art.scnassets/RollingstonesTNx50.png"
-                    save(name: parentName!, imageName: imageName, modelName: "RollingStones")
-                case "iHeartLogo":
-                    let imageName: String! = "art.scnassets/iheartwingsTNx50.png"
-                    save(name: parentName!, imageName: imageName, modelName: "iHeartLogo")
-                case "KJ97":
-                    let imageName: String! = "art.scnassets/kj97TNx50.png"
-                    save(name: parentName!, imageName: imageName, modelName: "KJ97")
-                case "iHeartWing":
-                    let imageName: String! = "art.scnassets/iheartwingsTNx50.png"
-                    save(name: parentName!, imageName: imageName, modelName: "iHeartWing")
-
-                default:
-                   return
-                }
-                
             }
-
         }
     }
     
@@ -407,11 +317,9 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
                 return
         }
         
-        // 1
         let managedContext =
             appDelegate.persistentContainer.viewContext
         
-        // 2
         let entity =
             NSEntityDescription.entity(forEntityName: "Item",
                                        in: managedContext)!
@@ -419,13 +327,10 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
         let item = NSManagedObject(entity: entity,
                                    insertInto: managedContext)
         
-        // 3
         item.setValue(name, forKeyPath: "name")
         item.setValue(imageName, forKeyPath: "imageName")
         item.setValue(modelName, forKeyPath: "modelName")
 
-        
-        // 4
         do {
             try managedContext.save()
             itemsCDArray.append(item)
@@ -454,27 +359,21 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
     
     func setupVideoOnNode(_ node: SCNNode, fromURL url: URL){
         
-        //1. Create An SKVideoNode
         var videoPlayerNode: SKVideoNode!
         
-        //2. Create An AVPlayer With Our Video URL
         let videoPlayer = AVPlayer(url: url)
         
-        //3. Intialize The Video Node With Our Video Player
         videoPlayerNode = SKVideoNode(avPlayer: videoPlayer)
         videoPlayerNode.yScale = -1
         
-        //4. Create A SpriteKitScene & Postion It
         let spriteKitScene = SKScene(size: CGSize(width: 600, height: 300))
         spriteKitScene.scaleMode = .aspectFit
         videoPlayerNode.position = CGPoint(x: spriteKitScene.size.width/2, y: spriteKitScene.size.height/2)
         videoPlayerNode.size = spriteKitScene.size
         spriteKitScene.addChild(videoPlayerNode)
         
-        //6. Set The Nodes Geoemtry Diffuse Contenets To Our SpriteKit Scene
         node.geometry?.firstMaterial?.diffuse.contents = spriteKitScene
         
-        //5. Play The Video
         videoPlayerNode.play()
         videoPlayer.volume = 0
         
@@ -491,17 +390,30 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
         }
     }
     
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        print("updating")
+    }
+    
     func locationManager(_ manager: CLLocationManager, didStartMonitoringFor region: CLRegion) {
         print("Monitoring \(region.identifier)")
     }
     
     func locationManager(_ manager: CLLocationManager, didDetermineState state: CLRegionState, for region: CLRegion) {
         if state == CLRegionState.inside{
-            //var modelURL: NSURL!
             print(region.identifier)
             setupModel(region)
             
         }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
+        setupModel(region)
+        print("Did enter region")
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
+        setupModel(region)
+        print("Did leave region")
     }
     
     func setupModel(_ region: CLRegion){
@@ -513,12 +425,9 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
                 return
             }
             
-            print("stop 1")
-            
             result?.data?.listLocations?.items!.forEach {
                 let name = $0?.name
                 if name == region.identifier{
-                    print("Stop 2")
                     let modelURLString = $0?.modelName
                     print(modelURLString!)
                     let modelURL = NSURL(string: modelURLString!)
@@ -529,7 +438,6 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
                         modelNode.addChildNode(modelChild)
                     }
                     let xPos = self.randomPosition(lowerBound: -1.5, upperBound: 1.5)
-                    //        let yPos = randomPosition(lowerBound: -1.5, upperBound: 1.5)
                     let zPos = self.randomPosition(lowerBound: -1.5, upperBound: 1.5)
                     
                     let position = SCNVector3Make(xPos, -2.5, zPos)

@@ -19,7 +19,6 @@ class DataService: NSObject {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appSyncClient = appDelegate.appSyncClient
         
-        
     }
 
 }

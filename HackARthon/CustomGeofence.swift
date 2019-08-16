@@ -30,7 +30,6 @@ class CustomGeofence: NSObject {
                 let name = $0?.name
                 let lat = $0?.lat
                 let long = $0?.long
-                //self.nameArray.append([self.name!, self.imageURL!])
 
                 print("Name:\(name!) Latitude:\(lat!) Longitude:\(long!)")
                 
@@ -40,8 +39,6 @@ class CustomGeofence: NSObject {
                 print("\(distance!) meters from \(name!)")
                 if distance! <= 1000.00 {
                     print("You are within 1000 meters of \(name!)")
-                    //self.closestCoordinates.append([lat!, long!])
-                    //print(self.closestCoordinates)
                     self.setupGeofence(lat: lat!, long: long!, name: name!)
                 }
             }
@@ -53,14 +50,9 @@ class CustomGeofence: NSObject {
         geofenceRegion = CLCircularRegion(center: geofenceCenter, radius: 20, identifier: name)
         print(geofenceRegion.identifier)
 
-        //if !ARViewController.shared.locationManager.monitoredRegions.contains(geofenceRegion){
-            LocationService.shared.manager.startMonitoring(for: geofenceRegion)
-            LocationService.shared.manager.startUpdatingLocation()
-        //}
+        LocationService.shared.manager.startMonitoring(for: geofenceRegion)
+        LocationService.shared.manager.startUpdatingLocation()
         LocationService.shared.manager.requestState(for: geofenceRegion)
-
-
-        //print(ARViewController.shared.locationManager.monitoredRegions)
 
     }
 }

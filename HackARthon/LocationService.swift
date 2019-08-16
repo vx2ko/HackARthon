@@ -13,18 +13,12 @@ import ARKit
 
 
 class LocationService: NSObject, CLLocationManagerDelegate {
-    // Swifty way of creating a singleton
     static let shared = LocationService()
     
-    // set the manager object right when it gets initialized
-    
     var manager: CLLocationManager = CLLocationManager()
-
     
     private override init() {
         super.init()
-        // delegate MUST be set while initialization
-        //manager.delegate = self
         manager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
         manager.distanceFilter = 5
     }
@@ -54,10 +48,7 @@ class LocationService: NSObject, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager,
                          didUpdateLocations locations: [CLLocation])
     {
-        // If location data can be determined
-        if let location = locations.last {
-            //currentLocation = location.coordinate
-        }
+
     }
     
     func locationManager(_ manager: CLLocationManager,

@@ -11,7 +11,6 @@
 		404FC240FCA9AE7DDEC05E14 /* Pods_HackARthonTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA06362F3FE6B6978CDA0A65 /* Pods_HackARthonTests.framework */; };
 		891C3A5A22FDFE86000BC793 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 891C3A5922FDFE86000BC793 /* awsconfiguration.json */; };
 		895138C522EA0C130028BB9C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895138C422EA0C130028BB9C /* AppDelegate.swift */; };
-		895138C722EA10A20028BB9C /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895138C622EA10A20028BB9C /* HomeModel.swift */; };
 		897B8C8122E9F0DC003B6969 /* HackARthonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897B8C8022E9F0DC003B6969 /* HackARthonTests.swift */; };
 		897B8C8C22E9F0DC003B6969 /* HackARthonUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897B8C8B22E9F0DC003B6969 /* HackARthonUITests.swift */; };
 		897B8CA322E9F109003B6969 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897B8C9A22E9F108003B6969 /* MapViewController.swift */; };
@@ -20,17 +19,12 @@
 		897B8CA622E9F109003B6969 /* ARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897B8C9D22E9F108003B6969 /* ARViewController.swift */; };
 		897B8CA722E9F109003B6969 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 897B8C9E22E9F108003B6969 /* LaunchScreen.storyboard */; };
 		897B8CA822E9F109003B6969 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 897B8C9F22E9F108003B6969 /* Main.storyboard */; };
-		897B8CA922E9F109003B6969 /* WhataburgerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897B8CA022E9F108003B6969 /* WhataburgerModel.swift */; };
-		897B8CAB22E9F109003B6969 /* iHeartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897B8CA222E9F109003B6969 /* iHeartModel.swift */; };
 		897B8CAD22E9F214003B6969 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 897B8CAC22E9F214003B6969 /* Info.plist */; };
 		897B8CAF22E9F21F003B6969 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 897B8CAE22E9F21F003B6969 /* Info.plist */; };
-		898526B222F4022D007CFE4A /* RollingStonesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898526B122F4022D007CFE4A /* RollingStonesModel.swift */; };
-		898526B422F40D91007CFE4A /* KJ97.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898526B322F40D91007CFE4A /* KJ97.swift */; };
-		898526B622F41344007CFE4A /* IheartWingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898526B522F41344007CFE4A /* IheartWingsModel.swift */; };
 		898526B822F41E82007CFE4A /* ContestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898526B722F41E82007CFE4A /* ContestViewController.swift */; };
 		898526BA22F74AFD007CFE4A /* CustomMapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898526B922F74AFD007CFE4A /* CustomMapAnnotation.swift */; };
 		89ABE92C22FF086800F0B0DD /* CustomGeofence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ABE92B22FF086800F0B0DD /* CustomGeofence.swift */; };
-		89ABE9302302423600F0B0DD /* LocationServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ABE92F2302423600F0B0DD /* LocationServices.swift */; };
+		89ABE9302302423600F0B0DD /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ABE92F2302423600F0B0DD /* LocationService.swift */; };
 		89ABE9342305EADE00F0B0DD /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ABE9332305EADE00F0B0DD /* DataService.swift */; };
 		89AFBACA22EA959500772B1D /* ItemTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89AFBAC922EA959500772B1D /* ItemTableViewController.swift */; };
 		89AFBACD22EF589E00772B1D /* HackARthon.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 89AFBACB22EF589E00772B1D /* HackARthon.xcdatamodeld */; };
@@ -64,7 +58,6 @@
 		852480B9247D781C8D82A28D /* Pods-HackARthonUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HackARthonUITests.debug.xcconfig"; path = "Target Support Files/Pods-HackARthonUITests/Pods-HackARthonUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		891C3A5922FDFE86000BC793 /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
 		895138C422EA0C130028BB9C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		895138C622EA10A20028BB9C /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
 		897B8C6622E9F0DB003B6969 /* HackARthon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HackARthon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		897B8C7C22E9F0DC003B6969 /* HackARthonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HackARthonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		897B8C8022E9F0DC003B6969 /* HackARthonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HackARthonTests.swift; sourceTree = "<group>"; };
@@ -76,18 +69,13 @@
 		897B8C9D22E9F108003B6969 /* ARViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARViewController.swift; sourceTree = "<group>"; };
 		897B8C9E22E9F108003B6969 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		897B8C9F22E9F108003B6969 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		897B8CA022E9F108003B6969 /* WhataburgerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhataburgerModel.swift; sourceTree = "<group>"; };
 		897B8CA122E9F109003B6969 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		897B8CA222E9F109003B6969 /* iHeartModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iHeartModel.swift; sourceTree = "<group>"; };
 		897B8CAC22E9F214003B6969 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		897B8CAE22E9F21F003B6969 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		898526B122F4022D007CFE4A /* RollingStonesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RollingStonesModel.swift; sourceTree = "<group>"; };
-		898526B322F40D91007CFE4A /* KJ97.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KJ97.swift; sourceTree = "<group>"; };
-		898526B522F41344007CFE4A /* IheartWingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IheartWingsModel.swift; sourceTree = "<group>"; };
 		898526B722F41E82007CFE4A /* ContestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContestViewController.swift; sourceTree = "<group>"; };
 		898526B922F74AFD007CFE4A /* CustomMapAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMapAnnotation.swift; sourceTree = "<group>"; };
 		89ABE92B22FF086800F0B0DD /* CustomGeofence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomGeofence.swift; sourceTree = "<group>"; };
-		89ABE92F2302423600F0B0DD /* LocationServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationServices.swift; sourceTree = "<group>"; };
+		89ABE92F2302423600F0B0DD /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		89ABE9332305EADE00F0B0DD /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		89AFBAC922EA959500772B1D /* ItemTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTableViewController.swift; sourceTree = "<group>"; };
 		89AFBACC22EF589E00772B1D /* HackARthon.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HackARthon.xcdatamodel; sourceTree = "<group>"; };
@@ -179,21 +167,15 @@
 				897B8C9C22E9F108003B6969 /* Assets.xcassets */,
 				897B8C9B22E9F108003B6969 /* art.scnassets */,
 				895138C422EA0C130028BB9C /* AppDelegate.swift */,
-				89ABE92F2302423600F0B0DD /* LocationServices.swift */,
 				897B8C9D22E9F108003B6969 /* ARViewController.swift */,
+				89AFBAC922EA959500772B1D /* ItemTableViewController.swift */,
+				897B8C9A22E9F108003B6969 /* MapViewController.swift */,
+				89AFBAD422F1D46700772B1D /* ItemARViewController.swift */,
+				898526B722F41E82007CFE4A /* ContestViewController.swift */,
+				89ABE92F2302423600F0B0DD /* LocationService.swift */,
 				89ABE9332305EADE00F0B0DD /* DataService.swift */,
 				89ABE92B22FF086800F0B0DD /* CustomGeofence.swift */,
-				897B8C9A22E9F108003B6969 /* MapViewController.swift */,
-				89AFBAC922EA959500772B1D /* ItemTableViewController.swift */,
-				89AFBAD422F1D46700772B1D /* ItemARViewController.swift */,
 				898526B922F74AFD007CFE4A /* CustomMapAnnotation.swift */,
-				898526B122F4022D007CFE4A /* RollingStonesModel.swift */,
-				898526B322F40D91007CFE4A /* KJ97.swift */,
-				898526B522F41344007CFE4A /* IheartWingsModel.swift */,
-				898526B722F41E82007CFE4A /* ContestViewController.swift */,
-				897B8CA222E9F109003B6969 /* iHeartModel.swift */,
-				897B8CA022E9F108003B6969 /* WhataburgerModel.swift */,
-				895138C622EA10A20028BB9C /* HomeModel.swift */,
 				89EB353C22FE142D005934A5 /* APINew.swift */,
 				897B8CA122E9F109003B6969 /* Info.plist */,
 				89AFBACB22EF589E00772B1D /* HackARthon.xcdatamodeld */,
@@ -447,24 +429,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				898526B222F4022D007CFE4A /* RollingStonesModel.swift in Sources */,
 				89EB353D22FE142D005934A5 /* APINew.swift in Sources */,
 				897B8CA322E9F109003B6969 /* MapViewController.swift in Sources */,
-				895138C722EA10A20028BB9C /* HomeModel.swift in Sources */,
 				898526BA22F74AFD007CFE4A /* CustomMapAnnotation.swift in Sources */,
 				89AFBAD522F1D46700772B1D /* ItemARViewController.swift in Sources */,
 				89ABE92C22FF086800F0B0DD /* CustomGeofence.swift in Sources */,
 				89AFBACD22EF589E00772B1D /* HackARthon.xcdatamodeld in Sources */,
-				897B8CAB22E9F109003B6969 /* iHeartModel.swift in Sources */,
 				89ABE9342305EADE00F0B0DD /* DataService.swift in Sources */,
-				898526B422F40D91007CFE4A /* KJ97.swift in Sources */,
 				897B8CA622E9F109003B6969 /* ARViewController.swift in Sources */,
 				895138C522EA0C130028BB9C /* AppDelegate.swift in Sources */,
-				898526B622F41344007CFE4A /* IheartWingsModel.swift in Sources */,
 				898526B822F41E82007CFE4A /* ContestViewController.swift in Sources */,
-				897B8CA922E9F109003B6969 /* WhataburgerModel.swift in Sources */,
 				89AFBACA22EA959500772B1D /* ItemTableViewController.swift in Sources */,
-				89ABE9302302423600F0B0DD /* LocationServices.swift in Sources */,
+				89ABE9302302423600F0B0DD /* LocationService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
